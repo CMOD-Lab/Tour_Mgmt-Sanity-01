@@ -1,0 +1,116 @@
+# =============================================================
+# .dockerignore for Tour_Management ASP.NET Web Forms Application
+# Excludes source code, PDB files, temp files, and build artifacts
+# to reduce Windows container image size for EKS deployment.
+# =============================================================
+
+# ---------------------------------------------------------------
+# Build Output & Intermediate Artifacts
+# ---------------------------------------------------------------
+bin/
+obj/
+bin/**
+obj/**
+
+# ---------------------------------------------------------------
+# Visual Studio Temporary / IDE Files
+# ---------------------------------------------------------------
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.DotSettings
+*.DotSettings.user
+_ReSharper*/
+*.resharper
+*.ncrunch*
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+
+# ---------------------------------------------------------------
+# PDB / Debug Symbol Files
+# ---------------------------------------------------------------
+*.pdb
+*.mdb
+
+# ---------------------------------------------------------------
+# NuGet Packages (restored during build stage)
+# ---------------------------------------------------------------
+packages/
+.nuget/
+*.nupkg
+*.snupkg
+
+# ---------------------------------------------------------------
+# Test Projects & Test Artifacts
+# ---------------------------------------------------------------
+*Tests/
+*Test/
+TestResults/
+coverage/
+*.trx
+*.coveragexml
+
+# ---------------------------------------------------------------
+# Documentation & Non-Runtime Files
+# ---------------------------------------------------------------
+README*
+readme*
+CHANGELOG*
+LICENSE*
+*.md
+docs/
+doc/
+
+# ---------------------------------------------------------------
+# Source Control Metadata
+# ---------------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+.gitmodules
+.svn/
+.hg/
+
+# ---------------------------------------------------------------
+# CI/CD & DevOps Configuration
+# ---------------------------------------------------------------
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+Jenkinsfile
+scripts/
+kubernetes/
+
+# ---------------------------------------------------------------
+# Docker Files
+# ---------------------------------------------------------------
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# ---------------------------------------------------------------
+# Log Files & Temporary Runtime Artifacts
+# ---------------------------------------------------------------
+*.log
+logs/
+temp/
+tmp/
+App_Data/*.ldf
+App_Data/*.mdf
+
+# ---------------------------------------------------------------
+# OS-Specific Files
+# ---------------------------------------------------------------
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride

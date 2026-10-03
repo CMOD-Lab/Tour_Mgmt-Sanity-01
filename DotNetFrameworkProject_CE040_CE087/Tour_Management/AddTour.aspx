@@ -73,6 +73,7 @@
         </div>
          <div class="col-md-5">   
         <p style="text-align:center; font-size:30px"; > Image for Tour</p>
+        <%-- cz-dotnet-1032: File selected here is uploaded to Amazon S3 (bucket: S3_BUCKET_NAME env var) instead of local filesystem. --%>
         <asp:FileUpload ID="FileUpload1"  Style="background-image: url('../Pics/add.png');" runat="server"/>
          
     </div> 

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: tour-management
+  labels:
+    name: tour-management
+    app: tour-management
+    environment: production
