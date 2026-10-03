@@ -1,0 +1,145 @@
+@page
+@model Tour_Management.Pages.UserCrudModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+        }
+
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+
+        tr.selected td {
+            background-color: #CE5D5A;
+            font-weight: bold;
+            color: white;
+        }
+
+        .edit-form input {
+            color: black;
+            width: 100%;
+        }
+
+        .btn-action {
+            background-color: #6B696B;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert @(Model.IsSuccess ? "alert-success" : "")">@Model.StatusMessage</div>
+    }
+
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert">@Model.ErrorMessage</div>
+    }
+    else
+    {
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <table>
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Gender</th>
+                        <th>Password</th>
+                        <th>City</th>
+                        <th>Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Users)
+                    {
+                        @if (Model.EditingEmail == user.Email)
+                        {
+                            <tr class="edit-form">
+                                <td>@user.Email</td>
+                                <td><input type="text" name="FirstName" value="@user.FirstName" /></td>
+                                <td><input type="text" name="LastName" value="@user.LastName" /></td>
+                                <td><input type="text" name="Gender" value="@user.Gender" /></td>
+                                <td><input type="password" name="Password" value="@user.Password" /></td>
+                                <td><input type="text" name="City" value="@user.City" /></td>
+                                <td>
+                                    <input type="hidden" name="Email" value="@user.Email" />
+                                    <button type="submit" name="handler" value="Update" class="btn-save">Save</button>
+                                    <button type="submit" name="handler" value="CancelEdit" class="btn-action">Cancel</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Gender</td>
+                                <td>@user.Password</td>
+                                <td>@user.City</td>
+                                <td>
+                                    <input type="hidden" name="Email" value="@user.Email" />
+                                    <button type="submit" name="handler" value="Edit" class="btn-action">Edit</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    }
+</body>
+</html>

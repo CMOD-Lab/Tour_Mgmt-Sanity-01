@@ -1,0 +1,95 @@
+@page
+@model Tour_Management.Pages.DisplayToursModel
+@{
+    ViewData["Title"] = "Display Tours";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style type="text/css">
+        table {
+            width: 875px;
+            margin-left: 13px;
+            margin-top: 21px;
+            margin-right: 130px;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+        }
+
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+
+        tr.selected td {
+            background-color: #CE5D5A;
+            font-weight: bold;
+            color: white;
+        }
+
+        img.tour-pic {
+            width: 200px;
+            height: 200px;
+        }
+
+        a.book-now {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@Model.ErrorMessage</div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>TOUR_NAME</th>
+                    <th>DAYS</th>
+                    <th>LOCATIONS</th>
+                    <th>TOUR_ID</th>
+                    <th>pic</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tour in Model.Tours)
+                {
+                    <tr>
+                        <td>@tour.TourName</td>
+                        <td>@tour.Days</td>
+                        <td>@tour.Locations</td>
+                        <td>@tour.TourId</td>
+                        <td>
+                            <img src="Tour_pics/@tour.Pic" class="tour-pic" alt="@tour.TourName" />
+                        </td>
+                        <td>
+                            <a class="book-now" href="/Order">Book Now</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+</html>

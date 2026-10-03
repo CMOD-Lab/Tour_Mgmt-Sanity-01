@@ -1,0 +1,176 @@
+@page
+@model Tour_Management.Pages.TourCrudModel
+@{
+    ViewData["Title"] = "Manage Tours";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+        }
+
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+
+        tr.selected td {
+            background-color: #CE5D5A;
+            font-weight: bold;
+            color: white;
+        }
+
+        img.tour-pic {
+            width: 150px;
+            height: 150px;
+        }
+
+        .edit-form input {
+            color: black;
+            width: 100%;
+        }
+
+        .btn-action {
+            background-color: #6B696B;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .btn-delete {
+            background-color: #CE5D5A;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background-color: #04AA6D;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert @(Model.IsSuccess ? "alert-success" : "")">@Model.StatusMessage</div>
+    }
+
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert">@Model.ErrorMessage</div>
+    }
+    else
+    {
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <table>
+                <thead>
+                    <tr>
+                        <th>TOUR_ID</th>
+                        <th>TOUR_NAME</th>
+                        <th>PLACE</th>
+                        <th>DAYS</th>
+                        <th>PRICE</th>
+                        <th>LOCATIONS</th>
+                        <th>TOUR_INFO</th>
+                        <th>pic</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var tour in Model.Tours)
+                    {
+                        @if (Model.EditingTourId == tour.TourId)
+                        {
+                            <tr class="edit-form">
+                                <td>@tour.TourId</td>
+                                <td><input type="text" name="TourName" value="@tour.TourName" /></td>
+                                <td><input type="text" name="Place" value="@tour.Place" /></td>
+                                <td><input type="text" name="Days" value="@tour.Days" /></td>
+                                <td><input type="text" name="Price" value="@tour.Price" /></td>
+                                <td><input type="text" name="Locations" value="@tour.Locations" /></td>
+                                <td><input type="text" name="TourInfo" value="@tour.TourInfo" /></td>
+                                <td>
+                                    <img src="Tour_pics/@tour.Pic" class="tour-pic" alt="@tour.TourName" />
+                                </td>
+                                <td>
+                                    <input type="hidden" name="TourId" value="@tour.TourId" />
+                                    <button type="submit" name="handler" value="Update" class="btn-save">Save</button>
+                                </td>
+                                <td>
+                                    <button type="submit" name="handler" value="CancelEdit" class="btn-action">Cancel</button>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td>@tour.TourId</td>
+                                <td>@tour.TourName</td>
+                                <td>@tour.Place</td>
+                                <td>@tour.Days</td>
+                                <td>@tour.Price</td>
+                                <td>@tour.Locations</td>
+                                <td>@tour.TourInfo</td>
+                                <td>
+                                    <img src="Tour_pics/@tour.Pic" class="tour-pic" alt="@tour.TourName" />
+                                </td>
+                                <td>
+                                    <input type="hidden" name="TourId" value="@tour.TourId" />
+                                    <button type="submit" name="handler" value="Edit" class="btn-action">Edit</button>
+                                </td>
+                                <td>
+                                    <input type="hidden" name="TourId" value="@tour.TourId" />
+                                    <button type="submit" name="handler" value="Delete" class="btn-delete"
+                                            onclick="return confirm('Delete this tour?')">Delete</button>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </form>
+    }
+</body>
+</html>

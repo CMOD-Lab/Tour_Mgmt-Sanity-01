@@ -1,0 +1,100 @@
+@page
+@model Tour_Management.Pages.OrderModel
+@{
+    ViewData["Title"] = "Confirm Tour";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style type="text/css">
+        .container {
+            text-align: center;
+            background-color: black;
+            width: 100%;
+            font-size: 30px;
+            color: white;
+            padding-bottom: 150px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Confirm Tour</h1>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.StatusMessage))
+        {
+            <div class="alert">@Model.StatusMessage</div>
+        }
+
+        <form method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label for="FirstName">Your Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input id="FirstName" name="FirstName" type="text" required="required"
+                               class="form-control" style="color:black;"
+                               value="@Model.FirstName" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label for="City">Your City</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input id="City" name="City" type="text"
+                               class="form-control" style="color:black;"
+                               value="@Model.City" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label for="TourName">Tour Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input id="TourName" name="TourName" type="text" required="required"
+                               class="form-control" style="color:black;"
+                               value="@Model.TourName" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label for="MobileNumber">Mobile Number</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input id="MobileNumber" name="MobileNumber" type="number" required="required"
+                               class="form-control" style="color:black;"
+                               value="@Model.MobileNumber" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="control-label col-sm-2">
+                        <button type="submit" name="handler" value="Register"
+                                style="background-color:#cc6600; color:black;" class="form-control">
+                            Register
+                        </button>
+                    </div>
+                    <div class="control-label col-sm-2">
+                        <button type="reset"
+                                style="background-color:#cc6600; color:black;" class="form-control">
+                            Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

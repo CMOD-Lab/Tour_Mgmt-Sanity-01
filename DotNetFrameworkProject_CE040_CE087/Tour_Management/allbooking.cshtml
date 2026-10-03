@@ -1,0 +1,84 @@
+@page
+@model Tour_Management.Pages.AllBookingModel
+@{
+    ViewData["Title"] = "All Bookings";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+        }
+
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+
+        tr.selected td {
+            background-color: #CE5D5A;
+            font-weight: bold;
+            color: white;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    @if (Model.ErrorMessage != null)
+    {
+        <div class="alert">@Model.ErrorMessage</div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>TOUR_ID</th>
+                    <th>TOUR_NAME</th>
+                    <th>PLACE</th>
+                    <th>Email</th>
+                    <th>FirstName</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var booking in Model.Bookings)
+                {
+                    <tr>
+                        <td>@booking.TourId</td>
+                        <td>@booking.TourName</td>
+                        <td>@booking.Place</td>
+                        <td>@booking.Email</td>
+                        <td>@booking.FirstName</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+</html>

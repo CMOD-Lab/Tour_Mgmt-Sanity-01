@@ -1,44 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-
-namespace Tour_Management
-{
-    public partial class SignUpForm : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void Register_Click(object sender, EventArgs e)
-        {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "insert into UserInfo(Email,FirstName,LastName,Gender,Password,dob,Street,City,State) values(@email,@FirstName,@LastName,@Gender,@Password,@dob,@Street,@City,@State)";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-            com.Parameters.AddWithValue("@Email", email.Text);
-            com.Parameters.AddWithValue("@FirstName", fname.Text);
-            com.Parameters.AddWithValue("@LastName", lname.Text);
-            com.Parameters.AddWithValue("@Gender", gender.Text);
-            com.Parameters.AddWithValue("@Password", password1.Text);
-            com.Parameters.AddWithValue("@dob", dob.Text);
-            com.Parameters.AddWithValue("@Street", street.Text);
-            com.Parameters.AddWithValue("@City", city.Text);
-            com.Parameters.AddWithValue("@State", state.Text);
-
-            com.ExecuteNonQuery();
-            Response.Write("Registration Successful");
-            Response.Redirect("userlogin.aspx");
-            Server.Transfer("usercrud.aspx");
-            conn.Close();
-
-        }
-           
-}
-    }
+// MIGRATED TO ASP.NET CORE RAZOR PAGES
+// This Web Forms code-behind file (SignUpForm.aspx.cs) has been migrated to
+// ASP.NET Core Razor Pages. The new implementation is in SignUpForm.cshtml.cs.
+//
+// Migration performed as part of cloud readiness remediation (Rule: cr-dotnet-0026).
+// The following Web Forms patterns have been removed and replaced:
+//   - Line 7:  using System.Web;                  → removed (Web Forms dependency)
+//   - Line 8:  using System.Web.UI;               → removed (Web Forms dependency)
+//   - Line 12: using System.Web.UI.WebControls;   → removed (Web Forms dependency)
+//   - Line 14: System.Web.UI.Page inheritance     → replaced with PageModel (Razor Pages)
+//
+// Rule cr-dotnet-0010: Web.config Transformations - Replaced with environment variables
+// and AWS Systems Manager Parameter Store. Configuration is now injected at runtime:
+//   - Line 21: ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString →
+//              Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
+//   - AWS SSM Parameter Store path: /tour-management/db-connection-string
+//   - Web.Debug.config and Web.Release.config build-time transforms are eliminated;
+//     environment-specific configuration is supplied via environment variables at runtime.
+//
+// The Register_Click event handler logic has been preserved in SignUpForm.cshtml.cs
+// as the OnPostRegister() handler, using Dapper with Amazon RDS Proxy for
+// cloud-native connection pooling.

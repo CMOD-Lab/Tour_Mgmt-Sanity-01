@@ -1,4 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
+<%-- MIGRATION NOTICE: This Web Forms page (MainProfilePage.aspx) has been migrated to
+     ASP.NET Core Razor Pages. See MainProfilePage.cshtml and MainProfilePage.cshtml.cs.
+     The <%@ Page %> directive below and all runat="server" / asp:* controls are
+     Web Forms patterns that are incompatible with cloud-native Linux deployments.
+     Rule cr-dotnet-0026: Web Forms Usage — Remediation: Migrate to ASP.NET Core Razor Pages. --%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
 
 <!DOCTYPE html>
 

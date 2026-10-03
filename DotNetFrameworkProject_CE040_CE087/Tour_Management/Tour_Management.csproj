@@ -66,6 +66,39 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <!-- Dapper: lightweight ORM for cloud-native connection pooling via Amazon RDS Proxy -->
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.0.123\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <!-- AWSSDK.Core: AWS SDK core library required by AWSSDK.S3 -->
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.204.13\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <!-- AWSSDK.S3: Amazon S3 SDK - replaces Server.MapPath file access (cr-dotnet-1032) -->
+    <!-- Enables stateless, scalable file uploads to S3 across ephemeral cloud instances -->
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.307.18\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <!-- Entity Framework Core: async Task-based data access replacing synchronous GridView/SqlDataSource (cr-dotnet-1034) -->
+    <!-- Prevents thread pool exhaustion under load; enables efficient auto-scaling on Amazon RDS -->
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.6.0.25\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.6.0.25\lib\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.6.0.25\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.6.0.1\lib\net6.0\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.6.0.0\lib\net6.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.4\lib\net6.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddTour.aspx" />
@@ -151,6 +184,14 @@
     <Compile Include="SignUpForm.aspx.designer.cs">
       <DependentUpon>SignUpForm.aspx</DependentUpon>
     </Compile>
+    <!-- TourManagementDbContext: EF Core DbContext for async data access (cr-dotnet-1034) -->
+    <!-- Replaces synchronous asp:SqlDataSource and asp:GridView Web Forms controls -->
+    <Compile Include="TourManagementDbContext.cs" />
+    <!--
+      cr-dotnet-1041: ContentSecurityPolicyModule — custom IHttpModule that injects
+      Content-Security-Policy and complementary security headers on every HTTP response.
+    -->
+    <Compile Include="ContentSecurityPolicyModule.cs" />
     <Compile Include="TourCrud.aspx.cs">
       <DependentUpon>TourCrud.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
