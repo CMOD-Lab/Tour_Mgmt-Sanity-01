@@ -1,0 +1,179 @@
+@page
+@model TourManagement.Web.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2>Admin Dashboard</h2>
+<hr />
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["Success"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<!-- Stats Cards -->
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white text-center p-3">
+            <h3>@Model.TourCount</h3>
+            <p>Total Tours</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white text-center p-3">
+            <h3>@Model.UserCount</h3>
+            <p>Registered Users</p>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white text-center p-3">
+            <h3>@Model.BookingCount</h3>
+            <p>Total Bookings</p>
+        </div>
+    </div>
+</div>
+
+<!-- Tours Management -->
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Tours Management</h5>
+        <a asp-page="/Tour/Create" class="btn btn-primary btn-sm">+ Add New Tour</a>
+    </div>
+    <div class="card-body">
+        @if (!Model.Tours.Any())
+        {
+            <p class="text-muted">No tours available.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tour Name</th>
+                            <th>Place</th>
+                            <th>Days</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tour in Model.Tours)
+                        {
+                            <tr>
+                                <td>@tour.TourId</td>
+                                <td>@tour.TourName</td>
+                                <td>@tour.Place</td>
+                                <td>@tour.Days</td>
+                                <td>₹@tour.Price.ToString("N0")</td>
+                                <td>
+                                    <a asp-page="/Tour/Details" asp-route-id="@tour.TourId" class="btn btn-sm btn-outline-info">View</a>
+                                    <a asp-page="/Tour/Edit" asp-route-id="@tour.TourId" class="btn btn-sm btn-outline-primary ms-1">Edit</a>
+                                    <a asp-page="/Tour/Delete" asp-route-id="@tour.TourId" class="btn btn-sm btn-outline-danger ms-1">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Users Management -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">Users Management</h5>
+    </div>
+    <div class="card-body">
+        @if (!Model.Users.Any())
+        {
+            <p class="text-muted">No users registered.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>City</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.Email</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.City</td>
+                                <td>
+                                    <a asp-page="/Admin/DeleteUser" asp-route-email="@user.Email" class="btn btn-sm btn-outline-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- All Bookings -->
+<div class="card mb-4">
+    <div class="card-header">
+        <h5 class="mb-0">All Bookings</h5>
+    </div>
+    <div class="card-body">
+        @if (!Model.Bookings.Any())
+        {
+            <p class="text-muted">No bookings yet.</p>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tour Name</th>
+                            <th>Place</th>
+                            <th>Email</th>
+                            <th>First Name</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var booking in Model.Bookings)
+                        {
+                            <tr>
+                                <td>@booking.BookingId</td>
+                                <td>@booking.TourName</td>
+                                <td>@booking.Place</td>
+                                <td>@booking.Email</td>
+                                <td>@booking.FirstName</td>
+                                <td>@booking.BookingDate.ToString("dd MMM yyyy")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

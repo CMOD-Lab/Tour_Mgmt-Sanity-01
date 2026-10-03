@@ -1,0 +1,52 @@
+@page
+@model TourManagement.Web.Pages.User.ProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+@if (Model.UserProfile == null)
+{
+    <div class="alert alert-warning">Please login to view your profile.</div>
+    <a asp-page="/User/Login" class="btn btn-primary">Login</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4>My Profile</h4>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["Success"]</div>
+                    }
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.UserProfile.Email</dd>
+
+                        <dt class="col-sm-4">Full Name</dt>
+                        <dd class="col-sm-8">@Model.UserProfile.FirstName @Model.UserProfile.LastName</dd>
+
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Model.UserProfile.Gender</dd>
+
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">@Model.UserProfile.Dob.ToString("dd MMM yyyy")</dd>
+
+                        <dt class="col-sm-4">Address</dt>
+                        <dd class="col-sm-8">@Model.UserProfile.Street, @Model.UserProfile.City, @Model.UserProfile.State</dd>
+                    </dl>
+
+                    <div class="mt-3">
+                        <a asp-page="/User/Edit" class="btn btn-outline-primary me-2">Edit Profile</a>
+                        <a asp-page="/Booking/MyBookings" class="btn btn-outline-success me-2">My Bookings</a>
+                        <a asp-page="/Tour/Index" class="btn btn-outline-info">Browse Tours</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

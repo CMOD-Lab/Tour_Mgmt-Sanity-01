@@ -1,0 +1,124 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EntryPointFilePath = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = TourManagement.Web
+build_property.RootNamespace = TourManagement.Web
+build_property.ProjectDir = /modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Admin/DeleteUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vRGVsZXRlVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Admin/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Booking/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZy9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Booking/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZy9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Booking/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZy9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Booking/MyBookings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQm9va2luZy9NeUJvb2tpbmdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Shared/_ValidationScripts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Tour/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91ci9DcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Tour/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91ci9EZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Tour/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91ci9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Tour/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91ci9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/Tour/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVG91ci9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/User/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9FZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Mb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/User/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Mb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/User/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9Qcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/User/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvVXNlci9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/modernize-data/studio-data/TNT1001/APP181862/transformed-code/107/studio-workspace/TourmgmtSanity02/src/TourManagement.Web/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

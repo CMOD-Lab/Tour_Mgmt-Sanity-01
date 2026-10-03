@@ -1,0 +1,60 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tour.DetailsModel
+@{
+    ViewData["Title"] = Model.Tour?.TourName ?? "Tour Details";
+}
+
+@if (Model.Tour == null)
+{
+    <div class="alert alert-warning">Tour not found.</div>
+    <a asp-page="/Tour/Index" class="btn btn-secondary">Back to Tours</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            @if (!string.IsNullOrEmpty(Model.Tour.Pic))
+            {
+                <img src="~/images/tours/@Model.Tour.Pic" class="img-fluid rounded shadow" alt="@Model.Tour.TourName" onerror="this.src='/images/default-tour.jpg'" />
+            }
+            else
+            {
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height:300px;">
+                    <span class="text-white" style="font-size:5rem;">🌍</span>
+                </div>
+            }
+        </div>
+        <div class="col-md-6">
+            <h2>@Model.Tour.TourName</h2>
+            <p class="text-muted fs-5">📍 @Model.Tour.Place</p>
+            <hr />
+            <table class="table table-borderless">
+                <tr>
+                    <th>Duration:</th>
+                    <td>@Model.Tour.Days days</td>
+                </tr>
+                <tr>
+                    <th>Price:</th>
+                    <td class="text-success fw-bold">₹@Model.Tour.Price.ToString("N0")</td>
+                </tr>
+                <tr>
+                    <th>Locations:</th>
+                    <td>@Model.Tour.Locations</td>
+                </tr>
+            </table>
+            <h5>About this Tour</h5>
+            <p>@Model.Tour.TourInfo</p>
+            <div class="mt-3">
+                @if (ViewContext.HttpContext.Session.GetString("UserEmail") != null)
+                {
+                    <a asp-page="/Booking/Create" asp-route-tourId="@Model.Tour.TourId" class="btn btn-success btn-lg me-2">Book This Tour</a>
+                }
+                else
+                {
+                    <a asp-page="/User/Login" class="btn btn-success btn-lg me-2">Login to Book</a>
+                }
+                <a asp-page="/Tour/Index" class="btn btn-outline-secondary">Back to Tours</a>
+            </div>
+        </div>
+    </div>
+}
