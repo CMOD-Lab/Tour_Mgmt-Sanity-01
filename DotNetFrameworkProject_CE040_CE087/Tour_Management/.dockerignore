@@ -1,0 +1,73 @@
+# ============================================================
+# .dockerignore for Tour_Management ASP.NET Web Forms
+# Excludes source code, PDB files, temp files, and build artifacts
+# to reduce Windows container image size for EKS deployment.
+# ============================================================
+
+# ----- PDB / Debug Symbol Files -----
+*.pdb
+**/*.pdb
+obj/Debug/*.pdb
+obj/Release/*.pdb
+bin/*.pdb
+
+# ----- Build Intermediate / Temp Artifacts -----
+obj/
+obj/**
+*.cache
+*.tmp
+*.log
+*.bak
+*.orig
+
+# ----- Visual Studio IDE Files -----
+.vs/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.DotSettings
+*.DotSettings.user
+_ReSharper*/
+*.resharper
+
+# ----- NuGet Package Sources (restored at build time) -----
+packages/
+*.nupkg
+*.nuspec
+
+# ----- Test / CI Artifacts -----
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.coveragexml
+
+# ----- OS / System Files -----
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*~
+
+# ----- Git / SCM -----
+.git/
+.gitignore
+.gitattributes
+.gitmodules
+
+# ----- Documentation -----
+README.md
+CHANGELOG.md
+*.md
+docs/
+
+# ----- App_Data (local DB files; use external DB in containers) -----
+App_Data/
+
+# ----- Roslyn compiler binaries (large; already in SDK image) -----
+bin/roslyn/
+
+# ----- Bin folder debug artifacts -----
+bin/*.pdb
+bin/*.xml
