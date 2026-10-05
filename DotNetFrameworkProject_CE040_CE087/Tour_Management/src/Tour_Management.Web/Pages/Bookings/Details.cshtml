@@ -1,0 +1,66 @@
+@page "{id:int}"
+@model Tour_Management.Web.Pages.Bookings.DetailsModel
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+@if (Model.Booking == null)
+{
+    <div class="alert alert-danger">Booking not found.</div>
+    <a asp-page="MyBookings" class="btn btn-secondary">Back to My Bookings</a>
+}
+else
+{
+    <h1><i class="bi bi-calendar-check"></i> Booking Details</h1>
+    <hr />
+
+    <div class="card">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Booking ID</dt>
+                <dd class="col-sm-9">#@Model.Booking.Id</dd>
+
+                <dt class="col-sm-3">Tour Name</dt>
+                <dd class="col-sm-9">@Model.Booking.TourName</dd>
+
+                <dt class="col-sm-3">Place</dt>
+                <dd class="col-sm-9">@Model.Booking.Place</dd>
+
+                <dt class="col-sm-3">Customer Email</dt>
+                <dd class="col-sm-9">@Model.Booking.Email</dd>
+
+                <dt class="col-sm-3">Customer Name</dt>
+                <dd class="col-sm-9">@Model.Booking.FirstName</dd>
+
+                <dt class="col-sm-3">Booking Date</dt>
+                <dd class="col-sm-9">@Model.Booking.BookingDate.ToString("dd MMM yyyy HH:mm")</dd>
+
+                <dt class="col-sm-3">Status</dt>
+                <dd class="col-sm-9">
+                    @if (Model.Booking.IsActive)
+                    {
+                        <span class="badge bg-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Cancelled</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            @if (HttpContext.Session.GetString("AdminEmail") != null)
+            {
+                <a asp-page="AllBookings" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to All Bookings
+                </a>
+            }
+            else
+            {
+                <a asp-page="MyBookings" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to My Bookings
+                </a>
+            }
+        </div>
+    </div>
+}

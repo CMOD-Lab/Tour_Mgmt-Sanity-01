@@ -1,0 +1,57 @@
+@page
+@model Tour_Management.Web.Pages.Users.ProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+@if (Model.CurrentUser == null)
+{
+    <div class="alert alert-warning">Please login to view your profile.</div>
+    <a asp-page="Login" class="btn btn-primary">Login</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0"><i class="bi bi-person-circle"></i> My Profile</h4>
+                </div>
+                <div class="card-body">
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Full Name</dt>
+                        <dd class="col-sm-8">@Model.CurrentUser.FirstName @Model.CurrentUser.LastName</dd>
+
+                        <dt class="col-sm-4">Email</dt>
+                        <dd class="col-sm-8">@Model.CurrentUser.Email</dd>
+
+                        <dt class="col-sm-4">Gender</dt>
+                        <dd class="col-sm-8">@Model.CurrentUser.Gender</dd>
+
+                        <dt class="col-sm-4">Date of Birth</dt>
+                        <dd class="col-sm-8">@(Model.CurrentUser.DateOfBirth?.ToString("dd MMM yyyy") ?? "Not provided")</dd>
+
+                        <dt class="col-sm-4">Address</dt>
+                        <dd class="col-sm-8">@Model.CurrentUser.Street, @Model.CurrentUser.City, @Model.CurrentUser.State</dd>
+
+                        <dt class="col-sm-4">Member Since</dt>
+                        <dd class="col-sm-8">@Model.CurrentUser.CreatedDate.ToString("dd MMM yyyy")</dd>
+                    </dl>
+                </div>
+                <div class="card-footer">
+                    <a asp-page="/Bookings/MyBookings" class="btn btn-primary">
+                        <i class="bi bi-calendar-check"></i> My Bookings
+                    </a>
+                    <a asp-page="Logout" class="btn btn-outline-danger ms-2">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

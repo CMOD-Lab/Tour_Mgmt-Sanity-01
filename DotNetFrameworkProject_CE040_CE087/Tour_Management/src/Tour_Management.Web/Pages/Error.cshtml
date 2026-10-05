@@ -1,0 +1,16 @@
+@page
+@model Tour_Management.Web.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="text-center">
+    <h1 class="display-1 text-danger"><i class="bi bi-exclamation-triangle"></i></h1>
+    <h2>An error occurred</h2>
+    @if (Model.ShowRequestId)
+    {
+        <p>Request ID: <code>@Model.RequestId</code></p>
+    }
+    <p>We're sorry, something went wrong. Please try again later.</p>
+    <a asp-page="/Index" class="btn btn-primary">Go Home</a>
+</div>

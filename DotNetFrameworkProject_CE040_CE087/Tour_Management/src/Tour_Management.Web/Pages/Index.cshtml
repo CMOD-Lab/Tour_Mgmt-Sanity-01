@@ -1,0 +1,84 @@
+@page
+@model Tour_Management.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="jumbotron bg-primary text-white p-5 rounded mb-4">
+    <h1 class="display-4"><i class="bi bi-airplane-fill"></i> Welcome to Tour Management</h1>
+    <p class="lead">Discover amazing tours and book your dream vacation today!</p>
+    <hr class="my-4" />
+    <a class="btn btn-light btn-lg" asp-page="/Tours/Index">Browse Tours</a>
+    @if (HttpContext.Session.GetString("UserEmail") == null && HttpContext.Session.GetString("AdminEmail") == null)
+    {
+        <a class="btn btn-outline-light btn-lg ms-2" asp-page="/Users/Register">Sign Up</a>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-center mb-4">
+            <div class="card-body">
+                <i class="bi bi-map display-4 text-primary"></i>
+                <h5 class="card-title mt-2">Explore Destinations</h5>
+                <p class="card-text">Browse our wide selection of tour packages to amazing destinations.</p>
+                <a asp-page="/Tours/Index" class="btn btn-primary">View Tours</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center mb-4">
+            <div class="card-body">
+                <i class="bi bi-calendar-check display-4 text-success"></i>
+                <h5 class="card-title mt-2">Easy Booking</h5>
+                <p class="card-text">Book your tour in just a few clicks with our simple booking system.</p>
+                @if (HttpContext.Session.GetString("UserEmail") != null)
+                {
+                    <a asp-page="/Bookings/MyBookings" class="btn btn-success">My Bookings</a>
+                }
+                else
+                {
+                    <a asp-page="/Users/Login" class="btn btn-success">Login to Book</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center mb-4">
+            <div class="card-body">
+                <i class="bi bi-person-plus display-4 text-info"></i>
+                <h5 class="card-title mt-2">Join Us</h5>
+                <p class="card-text">Create an account to manage your bookings and get exclusive deals.</p>
+                <a asp-page="/Users/Register" class="btn btn-info text-white">Register Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.FeaturedTours.Any())
+{
+    <h2 class="mt-4">Featured Tours</h2>
+    <div class="row">
+        @foreach (var tour in Model.FeaturedTours)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(tour.Pic))
+                    {
+                        <img src="~/Tour_pics/@tour.Pic" class="card-img-top" alt="@tour.TourName" style="height: 200px; object-fit: cover;" onerror="this.src='/images/default-tour.jpg'" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@tour.TourName</h5>
+                        <p class="card-text text-muted"><i class="bi bi-geo-alt"></i> @tour.Place</p>
+                        <p class="card-text"><i class="bi bi-calendar"></i> @tour.Days days</p>
+                        <p class="card-text"><strong class="text-success">₹@tour.Price.ToString("N2")</strong></p>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-page="/Tours/Details" asp-route-id="@tour.Id" class="btn btn-primary btn-sm">View Details</a>
+                        <a asp-page="/Bookings/Create" asp-route-tourId="@tour.Id" class="btn btn-success btn-sm">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

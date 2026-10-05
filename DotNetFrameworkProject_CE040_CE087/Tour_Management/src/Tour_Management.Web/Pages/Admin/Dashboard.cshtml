@@ -1,0 +1,96 @@
+@page
+@model Tour_Management.Web.Pages.Admin.DashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="bi bi-speedometer2"></i> Admin Dashboard</h1>
+    <span class="badge bg-dark fs-6"><i class="bi bi-shield-fill"></i> Admin: @HttpContext.Session.GetString("AdminEmail")</span>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Tours</h6>
+                        <h2>@Model.TotalTours</h2>
+                    </div>
+                    <i class="bi bi-map display-4"></i>
+                </div>
+                <a asp-page="/Tours/Index" class="btn btn-light btn-sm mt-2">Manage Tours</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Bookings</h6>
+                        <h2>@Model.TotalBookings</h2>
+                    </div>
+                    <i class="bi bi-calendar-check display-4"></i>
+                </div>
+                <a asp-page="/Bookings/AllBookings" class="btn btn-light btn-sm mt-2">View Bookings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="card-title">Total Users</h6>
+                        <h2>@Model.TotalUsers</h2>
+                    </div>
+                    <i class="bi bi-people display-4"></i>
+                </div>
+                <a asp-page="/Admin/Users" class="btn btn-light btn-sm mt-2">Manage Users</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-map"></i> Quick Actions - Tours</h5>
+            </div>
+            <div class="card-body">
+                <a asp-page="/Tours/Create" class="btn btn-success mb-2 w-100">
+                    <i class="bi bi-plus-circle"></i> Add New Tour
+                </a>
+                <a asp-page="/Tours/Index" class="btn btn-primary mb-2 w-100">
+                    <i class="bi bi-list"></i> View All Tours
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-calendar-check"></i> Quick Actions - Bookings</h5>
+            </div>
+            <div class="card-body">
+                <a asp-page="/Bookings/AllBookings" class="btn btn-success mb-2 w-100">
+                    <i class="bi bi-list"></i> View All Bookings
+                </a>
+                <a asp-page="/Admin/Users" class="btn btn-primary mb-2 w-100">
+                    <i class="bi bi-people"></i> Manage Users
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
