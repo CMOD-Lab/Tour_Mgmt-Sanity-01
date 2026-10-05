@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Tour_Management.Domain/1.0.0": {
+        "runtime": {
+          "Tour_Management.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Tour_Management.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

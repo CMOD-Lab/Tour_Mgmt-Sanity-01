@@ -1,0 +1,18 @@
+<environment include="Development">
+    <div class="alert alert-danger" role="alert">
+        <h4>An error occurred while processing your request.</h4>
+        <p>
+            <strong>Exception:</strong> @Model.Exception?.Message
+        </p>
+        <p>
+            <strong>Stack Trace:</strong>
+        </p>
+        <pre>@Model.Exception?.StackTrace</pre>
+    </div>
+</environment>
+<environment exclude="Development">
+    <div class="alert alert-danger" role="alert">
+        <h4>An error occurred while processing your request.</h4>
+        <p>Please try again later or contact support.</p>
+    </div>
+</environment>

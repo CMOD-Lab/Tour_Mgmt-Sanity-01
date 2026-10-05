@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "GBMLAR0YpMk=",
+  "success": true,
+  "projectFilePath": "/modernize-data/studio-data/TNT1001/APP982291/transformed-code/104/studio-workspace/Test Tour management GH basic/DotNetFrameworkProject_CE040_CE087/Tour_Management/src/Tour_Management.Domain/Tour_Management.Domain.csproj",
+  "expectedPackageFiles": [
+    "/app/.nuget/packages/microsoft.netcore.app.ref/8.0.30/microsoft.netcore.app.ref.8.0.30.nupkg.sha512",
+    "/app/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.30/microsoft.aspnetcore.app.ref.8.0.30.nupkg.sha512"
+  ],
+  "logs": []
+}

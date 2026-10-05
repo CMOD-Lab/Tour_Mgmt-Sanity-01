@@ -1,0 +1,66 @@
+@page
+@model Tour_Management.Web.Pages.Tours.ManageModel
+@{
+    ViewData["Title"] = "Manage Tours";
+}
+
+<h2>Manage Tours</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<div class="mb-3">
+    <a asp-page="/Tours/Create" class="btn btn-primary">Add New Tour</a>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Tour Name</th>
+                <th>Place</th>
+                <th>Days</th>
+                <th>Price</th>
+                <th>Locations</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tour in Model.Tours)
+            {
+                <tr>
+                    <td>@tour.TourId</td>
+                    <td>@tour.TourName</td>
+                    <td>@tour.Place</td>
+                    <td>@tour.Days</td>
+                    <td>@tour.Price.ToString("C")</td>
+                    <td>@tour.Locations</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(tour.Pic))
+                        {
+                            <img src="/Tour_pics/@tour.Pic" style="width:100px;height:80px;object-fit:cover;" alt="@tour.TourName" />
+                        }
+                    </td>
+                    <td>
+                        <a asp-page="/Tours/Edit" asp-route-id="@tour.TourId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-page="/Tours/Details" asp-route-id="@tour.TourId" class="btn btn-info btn-sm">Details</a>
+                        <form method="post" asp-page-handler="Delete" style="display:inline;">
+                            <input type="hidden" name="id" value="@tour.TourId" />
+                            <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Are you sure you want to delete this tour?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Tours.Any())
+{
+    <div class="alert alert-info">No tours found.</div>
+}

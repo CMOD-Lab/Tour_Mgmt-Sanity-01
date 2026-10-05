@@ -1,0 +1,40 @@
+@page
+@model Tour_Management.Web.Pages.Bookings.AllBookingsModel
+@{
+    ViewData["Title"] = "All Bookings";
+}
+
+<h2>All Bookings</h2>
+
+<div class="table-responsive mt-3">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Tour Name</th>
+                <th>Place</th>
+                <th>Email / Phone</th>
+                <th>First Name</th>
+                <th>Booking Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr>
+                    <td>@booking.TourId</td>
+                    <td>@booking.TourName</td>
+                    <td>@booking.Place</td>
+                    <td>@booking.Email</td>
+                    <td>@booking.FirstName</td>
+                    <td>@booking.CreatedDate.ToString("dd-MM-yyyy HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Bookings.Any())
+{
+    <div class="alert alert-info">No bookings found.</div>
+}

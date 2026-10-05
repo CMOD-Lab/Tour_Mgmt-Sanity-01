@@ -1,0 +1,42 @@
+/* Tour Management Site CSS */
+
+body {
+    padding-bottom: 60px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.card {
+    border-radius: 8px;
+}
+
+.table th {
+    white-space: nowrap;
+}
+
+.btn {
+    border-radius: 4px;
+}
+
+/* Tour card image */
+.card-img-top {
+    border-radius: 8px 8px 0 0;
+}
+
+/* Hero section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: white;
+    padding: 60px 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}

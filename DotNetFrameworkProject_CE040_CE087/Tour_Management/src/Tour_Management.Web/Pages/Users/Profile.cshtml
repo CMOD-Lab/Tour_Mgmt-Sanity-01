@@ -1,0 +1,44 @@
+@page
+@model Tour_Management.Web.Pages.Users.ProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<h2>My Profile</h2>
+
+@if (Model.UserProfile != null)
+{
+    <div class="card shadow mt-3">
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.UserProfile.Email</dd>
+
+                <dt class="col-sm-3">First Name</dt>
+                <dd class="col-sm-9">@Model.UserProfile.FirstName</dd>
+
+                <dt class="col-sm-3">Last Name</dt>
+                <dd class="col-sm-9">@Model.UserProfile.LastName</dd>
+
+                <dt class="col-sm-3">Gender</dt>
+                <dd class="col-sm-9">@Model.UserProfile.Gender</dd>
+
+                <dt class="col-sm-3">Date of Birth</dt>
+                <dd class="col-sm-9">@Model.UserProfile.DateOfBirth?.ToString("dd-MM-yyyy")</dd>
+
+                <dt class="col-sm-3">Street</dt>
+                <dd class="col-sm-9">@Model.UserProfile.Street</dd>
+
+                <dt class="col-sm-3">City</dt>
+                <dd class="col-sm-9">@Model.UserProfile.City</dd>
+
+                <dt class="col-sm-3">State</dt>
+                <dd class="col-sm-9">@Model.UserProfile.State</dd>
+            </dl>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning">Profile not found. Please <a asp-page="/Users/Login">login</a>.</div>
+}
