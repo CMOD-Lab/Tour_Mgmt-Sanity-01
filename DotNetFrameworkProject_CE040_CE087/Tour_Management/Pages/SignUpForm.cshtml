@@ -1,0 +1,148 @@
+@page
+@model Tour_Management.Pages.SignUpFormModel
+@{
+    ViewData["Title"] = "User Registration Form";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+    <style>
+        .container {
+            text-align: center;
+            background-color: black;
+            width: 100%;
+            font-size: 30px;
+            color: white;
+            padding-bottom: 150px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <br />
+
+    <div class="container">
+        <div class="page-header">
+            <h1>User Registration Form</h1>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.StatusMessage))
+        {
+            <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+                @Model.StatusMessage
+            </div>
+        }
+
+        <form method="post">
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.Email">Email</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.Email" type="email" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.FirstName">First Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.FirstName" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.LastName">Last Name</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.LastName" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.Gender">Gender</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <select asp-for="Input.Gender" class="form-control" style="color:black; width:361px;">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.Password">Enter Password</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.Password" type="password" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.ConfirmPassword">Re-enter Password</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.ConfirmPassword" type="password" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <br />
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.DateOfBirth">Date of birth (dd-mm-yyyy)</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.DateOfBirth" type="date" required="true" class="form-control" style="color:black; width:365px;" />
+                        <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.Street">Street</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.Street" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.City">City</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.City" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Input.State">State</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input asp-for="Input.State" required="true" class="form-control" style="color:black;" />
+                        <span asp-validation-for="Input.State" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-2">
+                        <button type="submit" class="form-control" style="background-color:#cc6600; color:black;">Register</button>
+                    </div>
+                    <div class="control-label col-sm-2">
+                        <button type="reset" class="form-control" style="background-color:#cc6600; color:black;">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

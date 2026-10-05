@@ -1,0 +1,108 @@
+@page
+@model Tour_Management.Pages.TourCrudModel
+@{
+    ViewData["Title"] = "Tour Management";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div>
+            @if (!string.IsNullOrEmpty(Model.StatusMessage))
+            {
+                <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+                    @Model.StatusMessage
+                </div>
+            }
+        </div>
+
+        <!-- Tour Grid Table — replaces asp:GridView with SqlDataSource from Web Forms -->
+        <table id="TourGrid"
+               style="background-color:white; border-color:#DEDFDE; border-style:None; border-width:1px; color:black; border-collapse:collapse; width:100%;">
+            <thead>
+                <tr style="background-color:#6B696B; color:white; font-weight:bold;">
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>TOUR_ID</th>
+                    <th>TOUR_NAME</th>
+                    <th>PLACE</th>
+                    <th>DAYS</th>
+                    <th>PRICE</th>
+                    <th>LOCATIONS</th>
+                    <th>TOUR_INFO</th>
+                    <th>pic</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Tours != null)
+                {
+                    bool alternate = false;
+                    foreach (var tour in Model.Tours)
+                    {
+                        string rowStyle = alternate ? "background-color:white;" : "background-color:#F7F7DE; text-align:center;";
+                        alternate = !alternate;
+
+                        if (Model.EditTourId.HasValue && Model.EditTourId.Value == tour.TourId)
+                        {
+                            <!-- Edit row -->
+                            <tr style="@rowStyle">
+                                <td>
+                                    <button type="submit" asp-page-handler="Update"
+                                            style="background-color:#6B696B; color:white;">Update</button>
+                                    <input type="hidden" name="EditTourId" value="@tour.TourId" />
+                                </td>
+                                <td>
+                                    <button type="submit" asp-page-handler="Delete"
+                                            onclick="return confirm('Delete this tour?');"
+                                            style="background-color:#CE5D5A; color:white;">Delete</button>
+                                    <input type="hidden" name="DeleteTourId" value="@tour.TourId" />
+                                </td>
+                                <td>@tour.TourId</td>
+                                <td><input type="text" name="TourName" value="@tour.TourName" class="form-control" /></td>
+                                <td><input type="text" name="Place" value="@tour.Place" class="form-control" /></td>
+                                <td><input type="text" name="Days" value="@tour.Days" class="form-control" /></td>
+                                <td><input type="text" name="Price" value="@tour.Price" class="form-control" /></td>
+                                <td><input type="text" name="Locations" value="@tour.Locations" class="form-control" /></td>
+                                <td><input type="text" name="TourInfo" value="@tour.TourInfo" class="form-control" /></td>
+                                <td>
+                                    <img src="~/Tour_pics/@tour.Pic" style="width:150px;height:150px" />
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style="@rowStyle">
+                                <td>
+                                    <a asp-page="/TourCrud" asp-route-editId="@tour.TourId"
+                                       style="color:blue;">Edit</a>
+                                </td>
+                                <td>
+                                    <button type="submit" asp-page-handler="Delete"
+                                            onclick="return confirm('Delete this tour?');"
+                                            style="background-color:#CE5D5A; color:white;">Delete</button>
+                                    <input type="hidden" name="DeleteTourId" value="@tour.TourId" />
+                                </td>
+                                <td>@tour.TourId</td>
+                                <td>@tour.TourName</td>
+                                <td>@tour.Place</td>
+                                <td>@tour.Days</td>
+                                <td>@tour.Price</td>
+                                <td>@tour.Locations</td>
+                                <td>@tour.TourInfo</td>
+                                <td>
+                                    <img src="~/Tour_pics/@tour.Pic" style="width:150px;height:150px" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>

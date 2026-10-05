@@ -1,10 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
+@* Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages (cr-dotnet-0026) *@
+@page
+@model Tour_Management.Pages.MainProfilePageModel
+@{
+    ViewData["Title"] = "Main Profile Page";
+}
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>@ViewData["Title"]</title>
     <style>
          ul {
   list-style-type: none;
@@ -105,21 +110,19 @@ li a:hover:not(.active) {
 </head>
 <body>
     <ul class="nav navbar-nav navbar-left" >
-                <li><a href="usercrud.aspx"><span class="glyphicons glyphicons-home"></span>Profile</a></li>
-                <li><a href="DisplayTours.aspx">Tours</a></li>    
-                 <li><a href="Order.aspx">Book Tour</a></li> 
-                  <li><a href="mybooking.aspx">Bookings info</a></li>
-                
-                
+                <li><a href="/usercrud"><span class="glyphicons glyphicons-home"></span>Profile</a></li>
+                <li><a href="/DisplayTours">Tours</a></li>    
+                 <li><a href="/Order">Book Tour</a></li> 
+                  <li><a href="/mybooking">Bookings info</a></li>
             </ul>
         
     <div class="welcome" style="text-align:center">
-        <asp:Label ID="Label1" runat="server" ></asp:Label>
+        <span>@Model.WelcomeMessage</span>
     </div>
     <div class="tour">    
                     <h2>
               <br/> <br/> <br/>
-                <a href="DisplayTours.aspx" class="btn btn-primary" style="width:300px; height:50px ; font-size:x-large;">Explore the Tours!</a><br/><br/><br/>
+                <a href="/DisplayTours" class="btn btn-primary" style="width:300px; height:50px ; font-size:x-large;">Explore the Tours!</a><br/><br/><br/>
                 <p class="label-info">
                     Find the best tour packages without any hustle.<br/>
                     Book and pack your lugguage.
@@ -127,8 +130,5 @@ li a:hover:not(.active) {
             </h2>
         
     </div>
-   
-
-
 </body>
 </html>

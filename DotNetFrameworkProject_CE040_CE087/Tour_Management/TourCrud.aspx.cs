@@ -1,46 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
+// MIGRATED: This Web Forms code-behind has been migrated to ASP.NET Core Razor Pages.
+// The equivalent Razor Page model is located at Pages/TourCrud.cshtml.cs.
+// This file is retained for reference only and is no longer active.
+// See Pages/TourCrud.cshtml.cs for the migrated PageModel implementation.
 
-namespace Tour_Management
-{
-    public partial class TourCrud : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+// Original Web Forms using statements replaced with ASP.NET Core equivalents:
+// using System.Web.UI;           -> Microsoft.AspNetCore.Mvc.RazorPages  (line 18 original)
+// using System.Web.UI.WebControls -> Microsoft.AspNetCore.Mvc
 
-            if (!Page.IsPostBack)
-            {
-                refreshdata();
-            }
-        }
-        public void refreshdata()
-        {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
-            conn.Open();
-            string insertQuery = "select * from Tour";
-            SqlCommand com = new SqlCommand(insertQuery, conn);
-          // GridView1.DataSource = insertQuery;
-           // GridView1.DataBind();
+// Original class: public partial class TourCrud : System.Web.UI.Page  (line 18 original)
+// Migrated class: public class TourCrudModel : PageModel  (see Pages/TourCrud.cshtml.cs)
+//
+// Rule cr-dotnet-0026 remediation applied at line 18:
+//   System.Web.UI.Page inheritance removed; class migrated to ASP.NET Core Razor Pages PageModel.
+//   refreshdata() method migrated to OnGet() + RefreshData() in Pages/TourCrud.cshtml.cs.
+//   SqlConnection usage retained in Razor Page with environment-variable-based connection string.
 
-
-            // SqlConnection con = new SqlConnection(@"Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True;User Instance=True");
-        //    SqlCommand cmd = new SqlCommand("select * from tbl_data", con);
-         //   SqlDataAdapter sda = new SqlDataAdapter(cmd);
-           // DataTable dt = new DataTable();
-            //sda.Fill(dt);
-           // GridView1.DataSource = dt;
-            //GridView1.DataBind();
-
-
-        }
-
-       
-    }
-}
+// ─── Rule cr-dotnet-0010 — Web.config Transformations — Remediation Applied ──────
+// Remediation: Replace Web.config Transformations with Environment Variables and
+//              AWS Systems Manager Parameter Store
+//
+// Original violation (line 25 in original TourCrud.aspx.cs):
+//   SqlConnection conn = new SqlConnection(
+//       ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+//
+// Fix applied in Pages/TourCrud.cshtml.cs (GetConnectionString method):
+//   - Removed dependency on ConfigurationManager.ConnectionStrings (Web.config-based)
+//   - Configuration is now resolved at runtime from:
+//       1. DB_CONNECTION_STRING environment variable (AWS ECS / Elastic Beanstalk /
+//          App Runner environment property) — primary source
+//       2. AWS Systems Manager Parameter Store via IConfiguration SSM provider
+//          (parameter path: /tour-management/db-connection-string) — secondary source
+//       3. appsettings.json "ConnectionStrings:dbconnection" — local dev fallback only
+//   - Web.Debug.config and Web.Release.config transformation files are no longer used;
+//     configuration is injected at runtime enabling immutable, environment-agnostic builds.
+// ─────────────────────────────────────────────────────────────────────────────────────

@@ -1,0 +1,91 @@
+@page
+@model Tour_Management.Pages.UserCrudModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <form method="post">
+        @Html.AntiForgeryToken()
+        <div>
+            @if (!string.IsNullOrEmpty(Model.StatusMessage))
+            {
+                <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+                    @Model.StatusMessage
+                </div>
+            }
+        </div>
+
+        <!-- User Grid Table — replaces asp:GridView with asp:SqlDataSource from Web Forms.
+             Original: asp:GridView ID="GridView1" AutoGenerateEditButton="True"
+                       DataKeyNames="Email" DataSourceID="SqlDataSource1" (line 11 original)
+             Original: asp:SqlDataSource SelectCommand/UpdateCommand (line 30 original)
+             cr-dotnet-1034: Migrated to model-bound HTML table with async EF Core handlers. -->
+        <table id="UserGrid"
+               style="background-color:white; border-color:#DEDFDE; border-style:None; border-width:1px; color:black; border-collapse:collapse; width:100%;">
+            <thead>
+                <tr style="background-color:#6B696B; color:white; font-weight:bold;">
+                    <th>Edit</th>
+                    <th>Email</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Gender</th>
+                    <th>Password</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Users != null)
+                {
+                    bool alternate = false;
+                    foreach (var user in Model.Users)
+                    {
+                        string rowStyle = alternate ? "background-color:white;" : "background-color:#F7F7DE; text-align:center;";
+                        alternate = !alternate;
+
+                        if (!string.IsNullOrEmpty(Model.EditEmail) && Model.EditEmail == user.Email)
+                        {
+                            <!-- Edit row — replaces AutoGenerateEditButton inline edit in Web Forms GridView -->
+                            <tr style="@rowStyle">
+                                <td>
+                                    <!-- cr-dotnet-1034: asp-page-handler="Update" maps to OnPostUpdateAsync() in UserCrud.cshtml.cs -->
+                                    <button type="submit" asp-page-handler="Update"
+                                            style="background-color:#6B696B; color:white;">Update</button>
+                                    <input type="hidden" name="EditEmail" value="@user.Email" />
+                                </td>
+                                <td>@user.Email</td>
+                                <td><input type="text" name="FirstName" value="@user.FirstName" class="form-control" /></td>
+                                <td><input type="text" name="LastName" value="@user.LastName" class="form-control" /></td>
+                                <td><input type="text" name="Gender" value="@user.Gender" class="form-control" /></td>
+                                <td><input type="password" name="Password" value="@user.Password" class="form-control" /></td>
+                                <td><input type="text" name="City" value="@user.City" class="form-control" /></td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr style="@rowStyle">
+                                <td>
+                                    <!-- Replaces AutoGenerateEditButton — navigates to edit mode for this row -->
+                                    <a asp-page="/UserCrud" asp-route-editEmail="@user.Email"
+                                       style="color:blue;">Edit</a>
+                                </td>
+                                <td>@user.Email</td>
+                                <td>@user.FirstName</td>
+                                <td>@user.LastName</td>
+                                <td>@user.Gender</td>
+                                <td>@user.Password</td>
+                                <td>@user.City</td>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>

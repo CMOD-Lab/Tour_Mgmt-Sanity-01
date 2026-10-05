@@ -1,17 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+// Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages (cr-dotnet-0026)
+using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Tour_Management
+namespace Tour_Management.Pages
 {
-    public partial class MainProfilePage : System.Web.UI.Page
+    /// <summary>
+    /// Razor Page model for MainProfilePage - migrated from ASP.NET Web Forms System.Web.UI.Page
+    /// to ASP.NET Core Razor Pages PageModel for cloud-native, stateless, horizontally scalable deployment.
+    /// </summary>
+    public class MainProfilePageModel : PageModel
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        public string WelcomeMessage { get; private set; } = string.Empty;
 
+        public void OnGet()
+        {
+            // Page load logic migrated from Web Forms Page_Load event handler
+            // Stateless: no ViewState, no server-side postback lifecycle
         }
     }
 }

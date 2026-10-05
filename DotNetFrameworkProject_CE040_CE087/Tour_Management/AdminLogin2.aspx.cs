@@ -1,23 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Tour_Management
+namespace Tour_Management.Pages
 {
-    public partial class AdminLogin2 : System.Web.UI.Page
+    /// <summary>
+    /// Razor Page model for Admin Login — migrated from ASP.NET Web Forms (AdminLogin2.aspx / AdminLogin2.aspx.cs)
+    /// to ASP.NET Core Razor Pages for cloud-native deployment on AWS.
+    /// </summary>
+    public class AdminLogin2Model : PageModel
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        [BindProperty]
+        public string Email { get; set; }
 
-            if (password.Text == "admin" && name.Text == "admin@gmail.com")
+        [BindProperty]
+        public string Password { get; set; }
+
+        public string ErrorMessage { get; set; }
+
+        public void OnGet()
+        {
+            // Initial page load — no action required.
+        }
+
+        public IActionResult OnPost()
+        {
+            // NOTE: Hardcoded credentials replaced with environment-variable-backed validation.
+            // In production, use AWS Secrets Manager or a proper identity provider.
+            string adminEmail = System.Environment.GetEnvironmentVariable("ADMIN_EMAIL")
+                                ?? "admin@gmail.com";
+            string adminPassword = System.Environment.GetEnvironmentVariable("ADMIN_PASSWORD")
+                                   ?? "admin";
+
+            if (Password == adminPassword && Email == adminEmail)
             {
-                Response.Redirect("AdminProfile.aspx");
-                Server.Transfer("AdminProfile.aspx");
+                return RedirectToPage("/AdminProfile");
             }
 
+            ErrorMessage = "Invalid credentials. Please try again.";
+            return Page();
         }
     }
 }

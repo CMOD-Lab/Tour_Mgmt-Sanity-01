@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+// Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages (cr-dotnet-0026)
+// Removed: System.Web, System.Web.UI, System.Web.UI.WebControls (Web Forms dependencies)
+// Added: Microsoft.AspNetCore.Mvc.RazorPages (ASP.NET Core Razor Pages)
+using System;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Tour_Management
+namespace Tour_Management.Pages
 {
-    public partial class AdminProfile : System.Web.UI.Page
+    // Migrated from System.Web.UI.Page to PageModel (ASP.NET Core Razor Pages)
+    public class AdminProfileModel : PageModel
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public void OnGet()
         {
-
+            // Page load logic migrated from Page_Load event handler to OnGet method
         }
     }
 }

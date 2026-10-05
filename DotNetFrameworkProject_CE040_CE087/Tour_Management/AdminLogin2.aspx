@@ -1,12 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" %>
+@page
+@model Tour_Management.Pages.AdminLogin2Model
+@{
+    ViewData["Title"] = "Admin Login";
+}
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>@ViewData["Title"]</title>
     <style>
-         .container {
+        .container {
             text-align: center;
             background-color: black;
             width: 100%;
@@ -18,14 +21,23 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form method="post">
         <div class="container">
-      <h1>Admin Login</h1>
-        <asp:Label ID="name1" runat="server" Text="Email"></asp:Label><br />
-        <asp:TextBox ID="name" runat="server"></asp:TextBox><br />
-        <asp:Label ID="password1" runat="server" Text="password"></asp:Label><br />
-        <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox><br />
-        <asp:Button ID="Button1" runat="server" Text="login" />
-     </div> </form>
+            <h1>Admin Login</h1>
+
+            @if (!string.IsNullOrEmpty(Model?.ErrorMessage))
+            {
+                <div class="alert alert-danger" style="color:red;">@Model.ErrorMessage</div>
+            }
+
+            <label for="name">Email</label><br />
+            <input type="email" id="name" name="Email" asp-for="Email" /><br />
+
+            <label for="password">Password</label><br />
+            <input type="password" id="password" name="Password" asp-for="Password" /><br />
+
+            <button type="submit" id="Button1">login</button>
+        </div>
+    </form>
 </body>
 </html>

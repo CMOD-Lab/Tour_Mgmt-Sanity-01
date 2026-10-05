@@ -66,6 +66,27 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.300.2\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.307.4\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <!-- cr-dotnet-1034: Added Entity Framework Core for async data access patterns
+         replacing synchronous GridView/SqlDataSource data binding.
+         EF Core connected to Amazon RDS prevents thread pool exhaustion under cloud load. -->
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.6.0.0\lib\net461\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddTour.aspx" />
@@ -172,6 +193,12 @@
     <Compile Include="userlogin.aspx.designer.cs">
       <DependentUpon>userlogin.aspx</DependentUpon>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+    <!-- cr-dotnet-1041: CspHttpModule provides Content-Security-Policy headers -->
+    <Compile Include="CspHttpModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
