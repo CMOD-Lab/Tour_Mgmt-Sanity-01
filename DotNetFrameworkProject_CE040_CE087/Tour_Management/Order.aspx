@@ -1,10 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="Tour_Management.Order" %>
+<%-- 
+    MIGRATION NOTE (cr-dotnet-0026): This file has been migrated from ASP.NET Web Forms
+    to ASP.NET Core Razor Pages pattern. The Web Forms <%@ Page %> directive, runat="server"
+    attributes, and <asp:*> server controls have been replaced with Razor Page equivalents.
+    The equivalent Razor Page is: Pages/Order.cshtml
+    This .aspx file is retained for reference only and should be replaced by the Razor Page.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="Tour_Management.Order" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>Book Tour</title>
     <style>
         .container {
             text-align: center;
@@ -18,37 +25,38 @@
     </style>
 </head>
 <body>
-   <form runat="server">
-     <div class="container" runat="server" >
+   <!-- Migrated from Web Forms <form runat="server"> to standard HTML form -->
+   <form method="post" action="/Order">
+     <div class="container">
         <div class="page-header">
                 <h1>Confirm Tour</h1>
         </div>
         <div class="form-horizontal">   
         <div class="form-group"> 
-             <div class="control-label col-sm-4"><asp:Label ID="Label1" runat="server" Text="Your Name"/></div>
-             <div class="col-sm-6"><asp:TextBox ID="name" runat="server" required="true" ForeColor="Black" class="form-control"/></div>
+             <!-- Migrated from <asp:Label> and <asp:TextBox> to standard HTML label/input -->
+             <div class="control-label col-sm-4"><label for="name">Your Name</label></div>
+             <div class="col-sm-6"><input type="text" id="name" name="name" required="true" class="form-control" style="color:black;" /></div>
         </div>
         <div class="form-group">
-             <div class="control-label col-sm-4"><asp:Label ID="Label3" runat="server" Text="Your City"/></div>
+             <div class="control-label col-sm-4"><label for="city">Your City</label></div>
              <div class="col-sm-6">
-                 <asp:TextBox ID="city" runat="server"></asp:TextBox>
+                 <input type="text" id="city" name="city" class="form-control" style="color:black;" />
              </div>
-            </div>
+        </div>
         <div class="form-group">
-                <div class="control-label col-sm-4"><asp:Label ID="Label5" runat="server" Text="Tour Name "/></div>
-                 <div class="col-sm-6"><asp:TextBox ID="tour_name"  required="true" runat="server"  ForeColor="Black" class="form-control"/></div>    
-                 </div>    
-       
+                <div class="control-label col-sm-4"><label for="tour_name">Tour Name</label></div>
+                <div class="col-sm-6"><input type="text" id="tour_name" name="tour_name" required="true" class="form-control" style="color:black;" /></div>    
+        </div>   
         <div class="form-group">
-                    <div class="control-label col-sm-4"><asp:Label ID="Label10" runat="server" Text="Mobile Number"/></div>
-                    <div class="col-sm-6"><asp:TextBox ID="number" required="true" runat="server"  ForeColor="Black" class="form-control" TextMode="Number"/></div>
-                </div>    
+                    <div class="control-label col-sm-4"><label for="number">Mobile Number</label></div>
+                    <div class="col-sm-6"><input type="number" id="number" name="number" required="true" class="form-control" style="color:black;" /></div>
+        </div>    
         <div class="form-group">           
-                    <div class="control-label col-sm-2"><asp:Button BackColor="#cc6600" ID="Book"  runat="server" Text="Register" ForeColor="Black" class="form-control" OnClick="btn_click" /></div>
-                    <div class="control-label col-sm-2"><asp:Button BackColor="#cc6600" ID="Reset" type="reset"  runat="server" Text="Reset"  ForeColor="Black" class="form-control"/></div>
-                </div>   
-            </div>     
+                    <div class="control-label col-sm-2"><input type="submit" value="Register" style="background-color:#cc6600; color:black;" class="form-control" /></div>
+                    <div class="control-label col-sm-2"><input type="reset" value="Reset" style="background-color:#cc6600; color:black;" class="form-control" /></div>
+        </div>   
+        </div>     
      </div>
-        </form>
+   </form>
 </body>
 </html>

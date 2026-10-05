@@ -1,0 +1,93 @@
+@page
+@model Tour_Management.Pages.UserLoginModel
+@*
+    MIGRATION NOTE (cr-dotnet-0026): Migrated from ASP.NET Web Forms (userlogin.aspx)
+    to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive (Web Forms - cr-dotnet-0026)
+    - Removed: runat="server" attributes
+    - Removed: <asp:Label>, <asp:TextBox>, <asp:Button> server controls
+    - Replaced: <form runat="server"> with Razor Pages <form method="post">
+    - Replaced: server controls with standard HTML inputs using asp-for tag helpers
+    - Added: @page and @model Razor Page directives
+    - Added: AntiForgeryToken for CSRF protection (cloud security best practice)
+    - Btn_Submit event handler migrated to OnPost() in UserLogin.cshtml.cs
+    - Btn_reg event handler migrated to OnPostRegister() in UserLogin.cshtml.cs
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User Login</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            text-align: center;
+            background-color: black;
+            width: 100%;
+            font-size: 30px;
+            color: white;
+            padding-bottom: 150px;
+            opacity: 0.8;
+        }
+    </style>
+    <script src="./script.js"></script>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'>
+</head>
+<body>
+    <br />
+    <br />
+
+    <div class="login-form">
+        <div class="container">
+            <div class="page-header">
+                <h1>User Login</h1>
+            </div>
+            <!-- Migrated from <form runat="server"> to Razor Pages form with AntiForgeryToken -->
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="control-label col-sm-4">
+                            <!-- Migrated from <asp:Label runat="server"> to standard HTML label -->
+                            <label asp-for="Email">Email</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Migrated from <asp:TextBox TextMode="Email" runat="server"> to HTML input -->
+                            <input asp-for="Email" type="email" required="true" style="color:black;" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-sm-4">
+                            <!-- Migrated from <asp:Label runat="server"> to standard HTML label -->
+                            <label asp-for="Password">Password</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Migrated from <asp:TextBox type="password" runat="server"> to HTML input -->
+                            <input asp-for="Password" type="password" required="true" style="color:black;" class="form-control" />
+                        </div>
+                        <!-- Migrated from <asp:Button OnClick="Btn_Submit" runat="server"> to submit button -->
+                        <div class="control-label col-sm-2">
+                            <button type="submit" asp-page-handler="Login"
+                                    style="background-color:#cc6600; color:black; height:35px; width:92px;"
+                                    class="form-control">Login</button>
+                        </div>
+                        <!-- Migrated from <asp:Button OnClick="Btn_reg" runat="server"> to submit button -->
+                        <div class="control-label col-sm-2">
+                            <button type="submit" asp-page-handler="Register"
+                                    style="background-color:#cc6600; color:black; height:38px; width:137px;"
+                                    class="form-control">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <p>&nbsp;</p>
+</body>
+</html>

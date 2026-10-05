@@ -1,0 +1,96 @@
+@page
+@model Tour_Management.Pages.UserCrudModel
+@*
+    cr-dotnet-1034: Async GridView Data Binding with RDS via Entity Framework Core
+    MIGRATION NOTE (cr-dotnet-0026 + cr-dotnet-1034): Migrated from ASP.NET Web Forms (usercrud.aspx)
+    to ASP.NET Core Razor Pages with async data binding.
+    - Line 11 (original): <asp:GridView AutoGenerateEditButton="True" runat="server"> synchronous server control
+      → Replaced with async Razor foreach table rendering
+    - Line 30 (original): <asp:SqlDataSource runat="server"> synchronous data source
+      → Replaced with async EF Core OnGetAsync() using ToListAsync() on Amazon RDS
+    - Removed: runat="server" attributes (not supported in ASP.NET Core)
+    - Added: @page and @model Razor Page directives
+    - Data is now loaded in async Task OnGetAsync() via EF Core and rendered with Razor foreach loop
+    - Update action migrated to async OnPostUpdateAsync() handler with AntiForgeryToken protection
+    - Prevents thread pool exhaustion under AWS cloud load; enables efficient auto-scaling
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+        td {
+            background-color: #F7F7DE;
+            text-align: center;
+            padding: 4px;
+        }
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+        .btn-update {
+            background-color: #6B696B;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+    </style>
+</head>
+<body>
+    @*
+        cr-dotnet-1034 (Line 11): Replaced synchronous <asp:GridView AutoGenerateEditButton="True">
+        server control with async Razor foreach table. Data loaded via async Task OnGetAsync()
+        using EF Core ToListAsync() connected to Amazon RDS.
+        Update action migrated to async OnPostUpdateAsync() handler.
+    *@
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Password</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Users != null)
+            {
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <form method="post" asp-page-handler="Update">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="originalEmail" value="@user.Email" />
+                            <td>@user.Email</td>
+                            <td><input type="text" name="firstName" value="@user.FirstName" style="color:black;" /></td>
+                            <td><input type="text" name="lastName" value="@user.LastName" style="color:black;" /></td>
+                            <td><input type="text" name="gender" value="@user.Gender" style="color:black;" /></td>
+                            <td><input type="password" name="password" value="@user.Password" style="color:black;" /></td>
+                            <td><input type="text" name="city" value="@user.City" style="color:black;" /></td>
+                            <td>
+                                <button type="submit" class="btn-update">Update</button>
+                        </form>
+                            </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

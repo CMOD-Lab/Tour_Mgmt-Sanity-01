@@ -1,0 +1,125 @@
+@page
+@model Tour_Management.Pages.TourCrudModel
+@*
+    cr-dotnet-1034: Async GridView Data Binding with RDS via Entity Framework Core
+    MIGRATION NOTE (cr-dotnet-0026 + cr-dotnet-1034): Migrated from ASP.NET Web Forms (TourCrud.aspx)
+    to ASP.NET Core Razor Pages with async data binding.
+    - Line 13 (original): <asp:GridView runat="server"> synchronous server control
+      → Replaced with async Razor foreach table rendering
+    - Line 40 (original): <asp:SqlDataSource runat="server"> synchronous data source
+      → Replaced with async EF Core OnGetAsync() using ToListAsync() on Amazon RDS
+    - Removed: runat="server" attributes (not supported in ASP.NET Core)
+    - Added: @page and @model Razor Page directives
+    - Data is now loaded in async Task OnGetAsync() via EF Core and rendered with Razor foreach loop
+    - Edit/Delete actions migrated to async OnPostUpdateAsync() / OnPostDeleteAsync() handlers
+    - Added: AntiForgeryToken for CSRF protection (cloud security best practice)
+    - Prevents thread pool exhaustion under AWS cloud load; enables efficient auto-scaling
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tour Management</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+        td {
+            background-color: #F7F7DE;
+            text-align: center;
+            padding: 4px;
+        }
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+        img.tour-pic {
+            width: 150px;
+            height: 150px;
+        }
+        .btn-delete {
+            background-color: #CE5D5A;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        .btn-update {
+            background-color: #6B696B;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+    </style>
+</head>
+<body>
+    @*
+        cr-dotnet-1034 (Line 13): Replaced synchronous <asp:GridView runat="server"> with async
+        Razor foreach table. Data loaded via async Task OnGetAsync() using EF Core ToListAsync()
+        connected to Amazon RDS - prevents thread pool exhaustion under cloud load.
+    *@
+    <table>
+        <thead>
+            <tr>
+                <th>TOUR_ID</th>
+                <th>TOUR_NAME</th>
+                <th>PLACE</th>
+                <th>DAYS</th>
+                <th>PRICE</th>
+                <th>LOCATIONS</th>
+                <th>TOUR_INFO</th>
+                <th>pic</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @*
+                cr-dotnet-1034 (Line 40): Replaced synchronous <asp:SqlDataSource> data binding
+                with async EF Core data loaded in OnGetAsync() and rendered here via Razor foreach.
+            *@
+            @if (Model.Tours != null)
+            {
+                @foreach (var tour in Model.Tours)
+                {
+                    <tr>
+                        <form method="post" asp-page-handler="Update">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="tourId" value="@tour.TourId" />
+                            <td>@tour.TourId</td>
+                            <td><input type="text" name="tourName" value="@tour.TourName" style="color:black;" /></td>
+                            <td><input type="text" name="place" value="@tour.Place" style="color:black;" /></td>
+                            <td><input type="number" name="days" value="@tour.Days" style="color:black;" /></td>
+                            <td><input type="number" name="price" value="@tour.Price" step="0.01" style="color:black;" /></td>
+                            <td><input type="text" name="locations" value="@tour.Locations" style="color:black;" /></td>
+                            <td><input type="text" name="tourInfo" value="@tour.TourInfo" style="color:black;" /></td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(tour.Pic))
+                                {
+                                    <img src="~/Tour_pics/@tour.Pic" class="tour-pic" alt="Tour image" />
+                                }
+                            </td>
+                            <td>
+                                <button type="submit" class="btn-update">Update</button>
+                        </form>
+                        <form method="post" asp-page-handler="Delete" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="tourId" value="@tour.TourId" />
+                            <button type="submit" class="btn-delete">Delete</button>
+                        </form>
+                            </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

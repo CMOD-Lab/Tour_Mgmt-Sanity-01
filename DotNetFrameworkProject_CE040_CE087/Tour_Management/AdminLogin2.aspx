@@ -1,12 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AdminLogin2.aspx.cs" Inherits="Tour_Management.AdminLogin2" %>
+@* Migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages (cr-dotnet-0026) *@
+@page "/AdminLogin2"
+@model Tour_Management.Pages.AdminLogin2Model
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>Admin Login</title>
     <style>
-         .container {
+        .container {
             text-align: center;
             background-color: black;
             width: 100%;
@@ -18,14 +20,21 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form method="post">
         <div class="container">
-      <h1>Admin Login</h1>
-        <asp:Label ID="name1" runat="server" Text="Email"></asp:Label><br />
-        <asp:TextBox ID="name" runat="server"></asp:TextBox><br />
-        <asp:Label ID="password1" runat="server" Text="password"></asp:Label><br />
-        <asp:TextBox ID="password" runat="server" TextMode="Password"></asp:TextBox><br />
-        <asp:Button ID="Button1" runat="server" Text="login" />
-     </div> </form>
+            <h1>Admin Login</h1>
+            <label asp-for="Email">Email</label><br />
+            <input asp-for="Email" type="text" /><br />
+            <label asp-for="Password">password</label><br />
+            <input asp-for="Password" type="password" /><br />
+
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <span style="color:red;">@Model.ErrorMessage</span><br />
+            }
+
+            <button type="submit">login</button>
+        </div>
+    </form>
 </body>
 </html>

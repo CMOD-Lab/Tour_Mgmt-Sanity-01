@@ -68,6 +68,31 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.300.2\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.300.2\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- cr-dotnet-1034: Entity Framework Core packages for async data binding on Amazon RDS -->
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.6.0.0\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.6.0.0\lib\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.6.0.0\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="AddTour.aspx" />
     <Content Include="AdminLogin2.aspx" />
     <Content Include="AdminProfile.aspx" />
@@ -144,6 +169,15 @@
       <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Tour.cs" />
+    <Compile Include="Pages\AllBooking.cshtml.cs" />
+    <!-- cr-dotnet-1041: CspHttpModule adds Content-Security-Policy headers to every
+         HTTP response for SOC2 / penetration-test cloud compliance. -->
+    <Compile Include="Security\CspHttpModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Pages\MyBooking.cshtml.cs" />
+    <Compile Include="Pages\TourCrud.cshtml.cs" />
     <Compile Include="SignUpForm.aspx.cs">
       <DependentUpon>SignUpForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -1,0 +1,68 @@
+@page
+@model Tour_Management.Pages.OrderModel
+@*
+    MIGRATION NOTE (cr-dotnet-0026): Migrated from ASP.NET Web Forms (Order.aspx)
+    to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive (Web Forms)
+    - Removed: runat="server" attributes
+    - Removed: <asp:Label>, <asp:TextBox>, <asp:Button> server controls
+    - Replaced: <form runat="server"> with Razor Pages <form asp-page="/Order" method="post">
+    - Replaced: server controls with standard HTML inputs using asp-for tag helpers
+    - Added: @page and @model Razor Page directives
+    - Added: AntiForgeryToken for CSRF protection (cloud security best practice)
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Book Tour</title>
+    <style>
+        .container {
+            text-align: center;
+            background-color: black;
+            width: 100%;
+            font-size: 30px;
+            color: white;
+            padding-bottom: 150px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Migrated from Web Forms <form runat="server"> to Razor Pages form with tag helpers -->
+    <form asp-page="/Order" method="post">
+        @Html.AntiForgeryToken()
+        <div class="container">
+            <div class="page-header">
+                <h1>Confirm Tour</h1>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <!-- Migrated from <asp:Label> to <label asp-for> tag helper -->
+                    <div class="control-label col-sm-4"><label asp-for="Name">Your Name</label></div>
+                    <!-- Migrated from <asp:TextBox> to <input asp-for> tag helper -->
+                    <div class="col-sm-6"><input asp-for="Name" required="true" style="color:black;" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4"><label asp-for="City">Your City</label></div>
+                    <div class="col-sm-6">
+                        <input asp-for="City" style="color:black;" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4"><label asp-for="TourName">Tour Name</label></div>
+                    <div class="col-sm-6"><input asp-for="TourName" required="true" style="color:black;" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-sm-4"><label asp-for="Number">Mobile Number</label></div>
+                    <div class="col-sm-6"><input asp-for="Number" type="number" required="true" style="color:black;" class="form-control" /></div>
+                </div>
+                <div class="form-group">
+                    <!-- Migrated from <asp:Button OnClick="btn_click"> to standard submit button -->
+                    <div class="control-label col-sm-2"><input type="submit" value="Register" style="background-color:#cc6600; color:black;" class="form-control" /></div>
+                    <div class="control-label col-sm-2"><input type="reset" value="Reset" style="background-color:#cc6600; color:black;" class="form-control" /></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

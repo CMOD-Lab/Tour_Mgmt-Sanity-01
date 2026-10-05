@@ -1,10 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
+<%-- 
+    MIGRATION NOTE (cr-dotnet-0026): This file has been migrated from ASP.NET Web Forms
+    to ASP.NET Core Razor Pages pattern. The Web Forms <%@ Page %> directive, runat="server"
+    attributes, and <asp:Label> server controls have been replaced with Razor Page equivalents.
+    The equivalent Razor Page is: Pages/MainProfilePage.cshtml
+    This .aspx file is retained for reference only and should be replaced by the Razor Page.
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MainProfilePage.aspx.cs" Inherits="Tour_Management.MainProfilePage" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>Main Profile Page</title>
     <style>
          ul {
   list-style-type: none;
@@ -109,12 +116,11 @@ li a:hover:not(.active) {
                 <li><a href="DisplayTours.aspx">Tours</a></li>    
                  <li><a href="Order.aspx">Book Tour</a></li> 
                   <li><a href="mybooking.aspx">Bookings info</a></li>
-                
-                
             </ul>
         
     <div class="welcome" style="text-align:center">
-        <asp:Label ID="Label1" runat="server" ></asp:Label>
+        <!-- Migrated from <asp:Label ID="Label1" runat="server"> to standard HTML span -->
+        <span id="welcomeLabel"></span>
     </div>
     <div class="tour">    
                     <h2>
@@ -127,8 +133,5 @@ li a:hover:not(.active) {
             </h2>
         
     </div>
-   
-
-
 </body>
 </html>
