@@ -1,6 +1,7 @@
 using AutoMapper;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Moq;
 using Tour_Management.Application.Mappings;
 using Tour_Management.Application.Services;
@@ -23,7 +24,7 @@ public class BookingServiceTests
     public BookingServiceTests()
     {
         _mockRepository = new Mock<IBookingRepository>();
-        var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
+        var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>(), NullLoggerFactory.Instance);
         _mapper = config.CreateMapper();
         _mockLogger = new Mock<ILogger<BookingService>>();
         _service = new BookingService(_mockRepository.Object, _mapper, _mockLogger.Object);
