@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -22,7 +22,8 @@ namespace Tour_Management
             
                
 
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+                string connectionString = System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+                SqlConnection conn = new SqlConnection(connectionString);
                 conn.Open();
                 string checkPasswordQuery = "select password from Userinfo where password='" + txtPassword.Text + "' and email = '" + txtEmail.Text + "'";
                 SqlCommand passComm = new SqlCommand(checkPasswordQuery, conn);

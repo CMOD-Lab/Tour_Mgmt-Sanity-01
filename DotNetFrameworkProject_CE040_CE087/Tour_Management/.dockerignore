@@ -1,0 +1,104 @@
+# .dockerignore for Tour_Management ASP.NET Web Forms Application
+# Excludes build artifacts, source code, PDB files, and unnecessary files
+# from the Docker build context to reduce image size and improve build speed.
+
+# ---------------------------------------------------------------
+# Build output directories
+# ---------------------------------------------------------------
+Tour_Management/bin/
+Tour_Management/obj/
+bin/
+obj/
+
+# ---------------------------------------------------------------
+# PDB / Debug symbol files
+# ---------------------------------------------------------------
+**/*.pdb
+**/*.mdb
+
+# ---------------------------------------------------------------
+# Visual Studio / IDE files
+# ---------------------------------------------------------------
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.csproj.user
+*.vbproj.user
+*.fsproj.user
+*.sln.ide
+
+# ---------------------------------------------------------------
+# NuGet packages (restored during build stage)
+# ---------------------------------------------------------------
+packages/
+*.nupkg
+*.nuspec
+
+# ---------------------------------------------------------------
+# Local database files (use environment variables for DB connection)
+# ---------------------------------------------------------------
+Tour_Management/App_Data/*.mdf
+Tour_Management/App_Data/*.ldf
+App_Data/*.mdf
+App_Data/*.ldf
+
+# ---------------------------------------------------------------
+# Temporary and cache files
+# ---------------------------------------------------------------
+TempImageFiles/
+**/TempImageFiles/
+**/*.tmp
+**/*.temp
+**/*.cache
+**/*.log
+
+# ---------------------------------------------------------------
+# Git version control
+# ---------------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+.gitmodules
+
+# ---------------------------------------------------------------
+# Documentation and markdown
+# ---------------------------------------------------------------
+*.md
+*.txt
+README*
+CHANGELOG*
+LICENSE*
+
+# ---------------------------------------------------------------
+# OS generated files
+# ---------------------------------------------------------------
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Desktop.ini
+
+# ---------------------------------------------------------------
+# Test projects and files
+# ---------------------------------------------------------------
+**/*Test*/
+**/*Tests*/
+**/*.Test.csproj
+**/*.Tests.csproj
+
+# ---------------------------------------------------------------
+# CI/CD configuration (not needed in container)
+# ---------------------------------------------------------------
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+Jenkinsfile
+
+# ---------------------------------------------------------------
+# Kubernetes and deployment scripts (not needed in container)
+# ---------------------------------------------------------------
+kubernetes/
+scripts/
+docs/
+docker-compose.yml

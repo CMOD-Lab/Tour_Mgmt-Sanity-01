@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  tour-management:
+    image: tour-management:latest
+    build:
+      context: .
+      dockerfile: Tour_Management/Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - ASPNET_ENV=Production
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING:-}
+      - DB_HOST=${DB_HOST:-}
+      - DB_PORT=${DB_PORT:-1433}
+      - DB_NAME=${DB_NAME:-}
+      - DB_USER=${DB_USER:-}
+      - DB_PASSWORD=${DB_PASSWORD:-}
+      - AWS_REGION=${AWS_REGION:-}
+      - AWS_S3_BUCKET=${AWS_S3_BUCKET:-}
+      - APP_PORT=80
+    volumes:
+      - tour_logs:/inetpub/logs
+    healthcheck:
+      test: ["CMD", "powershell", "-Command",
+             "try { $r = Invoke-WebRequest -Uri http://localhost/health -UseBasicParsing -TimeoutSec 5; if ($r.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 90s
+    restart: unless-stopped
+    networks:
+      - app-network
+
+volumes:
+  tour_logs:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge

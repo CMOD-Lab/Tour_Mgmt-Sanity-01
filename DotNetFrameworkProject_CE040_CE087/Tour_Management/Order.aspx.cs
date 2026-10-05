@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -18,7 +18,8 @@ namespace Tour_Management
 
         protected void btn_click(object sender, EventArgs e)
         {
-               SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+               string connectionString = System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+               SqlConnection conn = new SqlConnection(connectionString);
                 conn.Open();
                 string insertQuery = "insert into booking(TOUR_NAME,PLACE,Email,FirstName) values(@TOUR_NAME,@PLACE,@Email,@FirstName)";
                 SqlCommand com = new SqlCommand(insertQuery, conn);

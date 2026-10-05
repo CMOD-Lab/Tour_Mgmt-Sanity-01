@@ -97,6 +97,7 @@ namespace Tour_Management
 
         /// <summary>
         /// FileUpload1 control.
+        /// File content is uploaded to Amazon S3 via IRSA on EKS (see AddTour.aspx.cs Register_Click).
         /// </summary>
         /// <remarks>
         /// Auto-generated field.

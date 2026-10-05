@@ -73,6 +73,7 @@
         </div>
          <div class="col-md-5">   
         <p style="text-align:center; font-size:30px"; > Image for Tour</p>
+        <%-- File selected here is uploaded to Amazon S3 (S3_BUCKET_NAME env var) via IRSA on EKS; no local filesystem write occurs. --%>
         <asp:FileUpload ID="FileUpload1"  Style="background-image: url('../Pics/add.png');" runat="server"/>
          
     </div> 

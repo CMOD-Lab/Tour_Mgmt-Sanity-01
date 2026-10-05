@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tour-management
+  namespace: tour-management
+  labels:
+    app: tour-management
+    version: "1.0"
+    environment: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tour-management
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: tour-management
+        version: "1.0"
+    spec:
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: tour-management
+          image: {{IMAGE_URI}}
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: ASPNET_ENV
+              value: "Production"
+            - name: APP_PORT
+              value: "80"
+            - name: DB_CONNECTION_STRING
+              value: "{{DB_CONNECTION_STRING}}"
+            - name: DB_HOST
+              value: "{{DB_HOST}}"
+            - name: DB_PORT
+              value: "{{DB_PORT}}"
+            - name: DB_NAME
+              value: "{{DB_NAME}}"
+            - name: DB_USER
+              value: "{{DB_USER}}"
+            - name: DB_PASSWORD
+              value: "{{DB_PASSWORD}}"
+            - name: AWS_REGION
+              value: "{{AWS_REGION}}"
+            - name: AWS_S3_BUCKET
+              value: "{{AWS_S3_BUCKET}}"
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 90
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec:
+                command: ["powershell", "-Command", "Start-Sleep -Seconds 10"]
+      terminationGracePeriodSeconds: 30

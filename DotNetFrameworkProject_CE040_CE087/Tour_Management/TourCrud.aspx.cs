@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,7 +22,8 @@ namespace Tour_Management
         }
         public void refreshdata()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+            string connectionString = System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connectionString);
             conn.Open();
             string insertQuery = "select * from Tour";
             SqlCommand com = new SqlCommand(insertQuery, conn);
