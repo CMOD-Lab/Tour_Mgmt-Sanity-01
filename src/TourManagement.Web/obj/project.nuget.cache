@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "SgzOB+gjZI0=",
+  "dgSpecHash": "pPDeDyj/Yz8=",
   "success": true,
   "projectFilePath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj",
   "expectedPackageFiles": [
-    "/app/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
+    "/app/.nuget/packages/automapper/14.0.0/automapper.14.0.0.nupkg.sha512",
     "/app/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",
     "/app/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
     "/app/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",

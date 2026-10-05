@@ -54,7 +54,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[14.0.0, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",

@@ -54,7 +54,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[14.0.0, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -272,6 +272,113 @@
         }
       }
     },
+    "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj",
+        "projectName": "TourManagement.Web",
+        "projectPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj",
+        "packagesPath": "/app/.nuget/packages",
+        "outputPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/nuget.config",
+          "/app/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "/app/.nuget/packages": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "framework": "net8.0",
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Application/TourManagement.Application.csproj": {
+                "projectPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Application/TourManagement.Application.csproj"
+              },
+              "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Infrastructure/TourManagement.Infrastructure.csproj": {
+                "projectPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Infrastructure/TourManagement.Infrastructure.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.400"
+      },
+      "frameworks": {
+        "net8.0": {
+          "framework": "net8.0",
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.AspNetCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Serilog.Sinks.Console": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Serilog.Sinks.File": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/app/.dotnet/sdk/10.0.400/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/tests/TourManagement.UnitTests/TourManagement.UnitTests.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -305,6 +412,9 @@
               },
               "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Infrastructure/TourManagement.Infrastructure.csproj": {
                 "projectPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Infrastructure/TourManagement.Infrastructure.csproj"
+              },
+              "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj": {
+                "projectPath": "/modernize-data/studio-data/TNT1001/APP304523/transformed-code/113/studio-workspace/DotUp/src/TourManagement.Web/TourManagement.Web.csproj"
               }
             }
           }
@@ -328,7 +438,7 @@
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
-              "version": "[13.0.1, )"
+              "version": "[14.0.0, )"
             },
             "BCrypt.Net-Next": {
               "target": "Package",
@@ -349,6 +459,10 @@
             "Moq": {
               "target": "Package",
               "version": "[4.20.70, )"
+            },
+            "coverlet.msbuild": {
+              "target": "Package",
+              "version": "[*, )"
             },
             "xunit": {
               "target": "Package",
