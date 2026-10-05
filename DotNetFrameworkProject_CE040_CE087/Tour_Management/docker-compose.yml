@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  tour-management:
+    image: tour-management:latest
+    build:
+      context: ../..
+      dockerfile: DotNetFrameworkProject_CE040_CE087/Tour_Management/Dockerfile
+    ports:
+      - "80:80"
+    environment:
+      - ASPNET_ENV=Production
+      - CONNECTION_STRING=${CONNECTION_STRING:-Data Source=sqlserver;Initial Catalog=tourdb;User ID=sa;Password=YourStrong@Passw0rd}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME:-}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+    volumes:
+      - tour-logs:/inetpub/logs
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "powershell", "-Command",
+             "try { $r = Invoke-WebRequest -Uri http://localhost/health.ashx -UseBasicParsing; if ($r.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 60s
+    restart: unless-stopped
+
+volumes:
+  tour-logs:
+
+networks:
+  app-network:
+    driver: bridge

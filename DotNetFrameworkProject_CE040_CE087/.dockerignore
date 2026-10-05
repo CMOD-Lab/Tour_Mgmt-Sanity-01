@@ -1,0 +1,88 @@
+# =============================================================
+# .dockerignore for Tour_Management ASP.NET Web Forms (EKS)
+# Rule: cz-dotnet-1040 – Unoptimized Web Forms Container Image Size
+# Excludes PDB files, obj/bin artifacts, and temp files to
+# reduce Windows container image size on EKS.
+# NOTE: Source files (.cs, .csproj, .sln) are required by the
+# multi-stage build and must NOT be excluded here.
+# =============================================================
+
+# -------------------------------------------------------
+# User-specific and IDE files (not needed in build or runtime)
+# -------------------------------------------------------
+**/*.user
+**/*.suo
+**/*.config.user
+
+# -------------------------------------------------------
+# PDB / debug symbol files (bloat image, not needed at runtime)
+# -------------------------------------------------------
+**/*.pdb
+**/*.mdb
+
+# -------------------------------------------------------
+# Build output directories (obj and bin are rebuilt in Docker)
+# -------------------------------------------------------
+**/obj/
+**/bin/
+
+# -------------------------------------------------------
+# NuGet packages directory (restored during Docker build)
+# -------------------------------------------------------
+**/packages/
+
+# -------------------------------------------------------
+# Temporary and IDE-specific files
+# -------------------------------------------------------
+**/.vs/
+**/.vscode/
+**/.idea/
+**/Thumbs.db
+**/*.DS_Store
+**/desktop.ini
+
+# -------------------------------------------------------
+# Test projects and test output
+# -------------------------------------------------------
+**/*Tests*/
+**/*Test*/
+**/TestResults/
+
+# -------------------------------------------------------
+# Log files
+# -------------------------------------------------------
+**/*.log
+**/logs/
+
+# -------------------------------------------------------
+# Roslyn compiler toolchain (large, not needed at runtime)
+# -------------------------------------------------------
+**/bin/roslyn/
+
+# -------------------------------------------------------
+# App_Data local database files (use external DB in containers)
+# -------------------------------------------------------
+**/App_Data/*.mdf
+**/App_Data/*.ldf
+
+# -------------------------------------------------------
+# Git and CI metadata
+# -------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+.github/
+**/.gitkeep
+
+# -------------------------------------------------------
+# Docker files themselves (not needed inside the image)
+# -------------------------------------------------------
+Dockerfile
+.dockerignore
+
+# -------------------------------------------------------
+# Documentation and miscellaneous
+# -------------------------------------------------------
+README.md
+*.md
+LICENSE

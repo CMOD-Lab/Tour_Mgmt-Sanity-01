@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tour-management
+  namespace: tour-management
+  labels:
+    app: tour-management
+    app.kubernetes.io/name: tour-management
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/component: web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tour-management
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: tour-management
+        app.kubernetes.io/name: tour-management
+        app.kubernetes.io/version: "1.0.0"
+    spec:
+      # Windows containers require a Windows node pool on EKS
+      nodeSelector:
+        kubernetes.io/os: windows
+      containers:
+        - name: tour-management
+          image: "{{IMAGE_URI}}"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          env:
+            # ASP.NET environment
+            - name: ASPNET_ENV
+              value: "Production"
+            # SQL Server connection string — override with your RDS/SQL Server endpoint
+            - name: CONNECTION_STRING
+              value: "{{CONNECTION_STRING}}"
+            # AWS S3 configuration
+            - name: S3_BUCKET_NAME
+              value: "{{S3_BUCKET_NAME}}"
+            - name: AWS_REGION
+              value: "{{AWS_REGION}}"
+            # AWS credentials (prefer IAM roles for EKS; set only if not using IRSA)
+            - name: AWS_ACCESS_KEY_ID
+              value: "{{AWS_ACCESS_KEY_ID}}"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "{{AWS_SECRET_ACCESS_KEY}}"
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "500m"
+              memory: "1Gi"
+          # Liveness probe — uses the health.ashx endpoint detected in the application
+          livenessProbe:
+            httpGet:
+              path: /health.ashx
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+          # Readiness probe — same endpoint; pod receives traffic only when healthy
+          readinessProbe:
+            httpGet:
+              path: /health.ashx
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 45
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 3
+            successThreshold: 1
+      terminationGracePeriodSeconds: 30

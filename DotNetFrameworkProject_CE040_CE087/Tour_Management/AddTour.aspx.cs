@@ -1,11 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Amazon;
+using Amazon.S3;
+using Amazon.S3.Transfer;
 
 namespace Tour_Management
 {
@@ -18,7 +22,7 @@ namespace Tour_Management
        
         protected void Register_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+            SqlConnection conn = new SqlConnection(System.Environment.GetEnvironmentVariable("CONNECTION_STRING") ?? ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
             conn.Open();
             string insertQuery = "insert into Tour(TOUR_NAME,PLACE,DAYS,PRICE,LOCATIONS,TOUR_INFO,pic) values(@TOUR_NAME,@PLACE,@DAYS,@PRICE,@LOCATIONS,@TOUR_INFO,@pic)";
             SqlCommand com = new SqlCommand(insertQuery, conn);
@@ -30,10 +34,27 @@ namespace Tour_Management
             com.Parameters.AddWithValue("@LOCATIONS", locations.Text);
             com.Parameters.AddWithValue("@TOUR_INFO", tour_info.Text);
 
-            FileUpload1.SaveAs(Server.MapPath("~/Tour_pics/") + FileUpload1.FileName);
+            // Upload file to Amazon S3 via IRSA (no embedded credentials)
+            string s3BucketName = System.Environment.GetEnvironmentVariable("S3_BUCKET_NAME") ?? ConfigurationManager.AppSettings["S3BucketName"];
+            string s3KeyPrefix = System.Environment.GetEnvironmentVariable("S3_KEY_PREFIX") ?? "Tour_pics/";
+            string awsRegion = System.Environment.GetEnvironmentVariable("AWS_REGION") ?? "us-east-1";
+            string s3ObjectKey = s3KeyPrefix + FileUpload1.FileName;
 
-             com.Parameters.AddWithValue("@pic", FileUpload1.FileName);
+            using (var s3Client = new AmazonS3Client(RegionEndpoint.GetBySystemName(awsRegion)))
+            using (var transferUtility = new TransferUtility(s3Client))
+            using (Stream fileStream = FileUpload1.FileContent)
+            {
+                var uploadRequest = new TransferUtilityUploadRequest
+                {
+                    BucketName = s3BucketName,
+                    Key = s3ObjectKey,
+                    InputStream = fileStream,
+                    ContentType = FileUpload1.PostedFile.ContentType
+                };
+                transferUtility.Upload(uploadRequest);
+            }
 
+            com.Parameters.AddWithValue("@pic", FileUpload1.FileName);
 
             com.ExecuteNonQuery();
             Response.Write("ADD  Successful");

@@ -1,0 +1,55 @@
+# .NET Framework / ASP.NET Web Forms - Docker ignore file
+# Excludes build artifacts, IDE files, and sensitive data
+
+# Build output directories
+bin/
+obj/
+publish/
+
+# Visual Studio IDE files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet packages (restored during build)
+packages/
+
+# Temporary and log files
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
+
+# Documentation
+*.md
+README*
+
+# Test projects
+*Tests/
+*Test/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+
+# Local database files (use external SQL Server in containers)
+App_Data/*.mdf
+App_Data/*.ldf
+
+# Launch settings (dev only)
+Properties/launchSettings.json
+
+# Secrets and environment files
+*.env
+.env*
+secrets/
+
+# Kubernetes and deployment scripts (not needed in image)
+kubernetes/
+scripts/
+docs/
