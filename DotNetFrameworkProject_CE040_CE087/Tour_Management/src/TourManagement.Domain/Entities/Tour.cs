@@ -1,0 +1,22 @@
+namespace TourManagement.Domain.Entities;
+
+/// <summary>
+/// Represents a tour package in the Tour Management system.
+/// </summary>
+public class Tour
+{
+    public int Id { get; set; }
+    public string TourName { get; set; } = string.Empty;
+    public string Place { get; set; } = string.Empty;
+    public int Days { get; set; }
+    public decimal Price { get; set; }
+    public string? Locations { get; set; }
+    public string? TourInfo { get; set; }
+    public string? PicturePath { get; set; }
+    public bool IsActive { get; set; } = true;
+    public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
+    public DateTime? ModifiedDate { get; set; }
+
+    // Navigation properties
+    public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
+}

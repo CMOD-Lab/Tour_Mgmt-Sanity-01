@@ -1,0 +1,37 @@
+@page
+@model TourManagement.Web.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <h1 class="text-center mb-4">Admin Login</h1>
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white text-center">
+                <strong>Administrator Access</strong>
+            </div>
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">Admin Email</label>
+                        <input asp-for="Email" class="form-control" placeholder="admin@gmail.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Password" class="form-label">Password</label>
+                        <input asp-for="Password" class="form-control" type="password" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-danger">Login as Admin</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

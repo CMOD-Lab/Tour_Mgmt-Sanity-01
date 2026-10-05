@@ -1,0 +1,52 @@
+@page
+@model TourManagement.Web.Pages.Users.ProfileModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+@if (Model.User == null)
+{
+    <div class="alert alert-warning">
+        Please <a asp-page="Login">login</a> to view your profile.
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h1>My Profile</h1>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-3">Full Name</dt>
+                <dd class="col-sm-9">@Model.User.FirstName @Model.User.LastName</dd>
+
+                <dt class="col-sm-3">Email</dt>
+                <dd class="col-sm-9">@Model.User.Email</dd>
+
+                <dt class="col-sm-3">Gender</dt>
+                <dd class="col-sm-9">@Model.User.Gender</dd>
+
+                @if (!string.IsNullOrEmpty(Model.User.DateOfBirth))
+                {
+                    <dt class="col-sm-3">Date of Birth</dt>
+                    <dd class="col-sm-9">@Model.User.DateOfBirth</dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.User.Street))
+                {
+                    <dt class="col-sm-3">Address</dt>
+                    <dd class="col-sm-9">@Model.User.Street, @Model.User.City, @Model.User.State</dd>
+                }
+
+                <dt class="col-sm-3">Member Since</dt>
+                <dd class="col-sm-9">@Model.User.CreatedDate.ToString("dd MMM yyyy")</dd>
+            </dl>
+
+            <div class="d-flex gap-2 mt-3">
+                <a asp-page="Edit" asp-route-id="@Model.User.Id" class="btn btn-warning">Edit Profile</a>
+                <a asp-page="/Bookings/MyBookings" class="btn btn-info">My Bookings</a>
+                <a asp-page="Logout" class="btn btn-outline-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+}

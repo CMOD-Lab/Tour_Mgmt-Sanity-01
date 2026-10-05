@@ -1,0 +1,89 @@
+@page
+@model TourManagement.Web.Pages.Users.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <h1 class="text-center mb-4">Create Account</h1>
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Register.FirstName" class="form-label"></label>
+                            <input asp-for="Register.FirstName" class="form-control" />
+                            <span asp-validation-for="Register.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Register.LastName" class="form-label"></label>
+                            <input asp-for="Register.LastName" class="form-control" />
+                            <span asp-validation-for="Register.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.Email" class="form-label">Email Address</label>
+                        <input asp-for="Register.Email" class="form-control" />
+                        <span asp-validation-for="Register.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.Gender" class="form-label">Gender</label>
+                        <select asp-for="Register.Gender" class="form-select">
+                            <option value="">-- Select Gender --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span asp-validation-for="Register.Gender" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.DateOfBirth" class="form-label"></label>
+                        <input asp-for="Register.DateOfBirth" class="form-control" type="date" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.Street" class="form-label">Street Address</label>
+                        <input asp-for="Register.Street" class="form-control" />
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Register.City" class="form-label">City</label>
+                            <input asp-for="Register.City" class="form-control" />
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Register.State" class="form-label">State</label>
+                            <input asp-for="Register.State" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.Password" class="form-label">Password</label>
+                        <input asp-for="Register.Password" class="form-control" type="password" />
+                        <span asp-validation-for="Register.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Register.ConfirmPassword" class="form-label"></label>
+                        <input asp-for="Register.ConfirmPassword" class="form-control" type="password" />
+                        <span asp-validation-for="Register.ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Register</button>
+                    </div>
+                </form>
+                <hr />
+                <p class="text-center mb-0">
+                    Already have an account? <a asp-page="Login">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

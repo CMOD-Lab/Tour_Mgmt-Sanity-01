@@ -1,0 +1,38 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Bookings.DeleteModel
+@{
+    ViewData["Title"] = "Cancel Booking";
+}
+
+@if (Model.Booking == null)
+{
+    <div class="alert alert-warning">Booking not found.</div>
+    <a asp-page="MyBookings" class="btn btn-secondary">Back to My Bookings</a>
+}
+else
+{
+    <h1>Cancel Booking</h1>
+    <hr />
+    <div class="alert alert-warning">
+        <strong>Are you sure you want to cancel this booking?</strong>
+    </div>
+
+    <dl class="row">
+        <dt class="col-sm-3">Tour Name</dt>
+        <dd class="col-sm-9">@Model.Booking.TourName</dd>
+
+        <dt class="col-sm-3">Place</dt>
+        <dd class="col-sm-9">@Model.Booking.Place</dd>
+
+        <dt class="col-sm-3">Booked On</dt>
+        <dd class="col-sm-9">@Model.Booking.CreatedDate.ToString("dd MMM yyyy")</dd>
+    </dl>
+
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.Booking.Id" />
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+            <a asp-page="MyBookings" class="btn btn-secondary">Keep Booking</a>
+        </div>
+    </form>
+}

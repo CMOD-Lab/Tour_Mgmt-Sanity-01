@@ -1,0 +1,56 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DetailsModel
+@{
+    ViewData["Title"] = Model.Tour?.TourName ?? "Tour Details";
+}
+
+@if (Model.Tour == null)
+{
+    <div class="alert alert-warning">Tour not found.</div>
+    <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Tour.TourName</h1>
+            <hr />
+            @if (!string.IsNullOrEmpty(Model.Tour.PicturePath))
+            {
+                <img src="~/tour-images/@Model.Tour.PicturePath" class="img-fluid rounded mb-3" alt="@Model.Tour.TourName" style="max-height:400px;width:100%;object-fit:cover;" />
+            }
+
+            <dl class="row">
+                <dt class="col-sm-3">Place</dt>
+                <dd class="col-sm-9">@Model.Tour.Place</dd>
+
+                <dt class="col-sm-3">Duration</dt>
+                <dd class="col-sm-9">@Model.Tour.Days days</dd>
+
+                <dt class="col-sm-3">Price</dt>
+                <dd class="col-sm-9 text-success fw-bold">₹@Model.Tour.Price.ToString("N0")</dd>
+
+                @if (!string.IsNullOrEmpty(Model.Tour.Locations))
+                {
+                    <dt class="col-sm-3">Locations</dt>
+                    <dd class="col-sm-9">@Model.Tour.Locations</dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Tour.TourInfo))
+                {
+                    <dt class="col-sm-3">Tour Info</dt>
+                    <dd class="col-sm-9">@Model.Tour.TourInfo</dd>
+                }
+
+                <dt class="col-sm-3">Added On</dt>
+                <dd class="col-sm-9">@Model.Tour.CreatedDate.ToString("dd MMM yyyy")</dd>
+            </dl>
+
+            <div class="d-flex gap-2 mt-3">
+                <a asp-page="/Bookings/Create" asp-route-tourId="@Model.Tour.Id" class="btn btn-success btn-lg">Book This Tour</a>
+                <a asp-page="Edit" asp-route-id="@Model.Tour.Id" class="btn btn-warning">Edit</a>
+                <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+            </div>
+        </div>
+    </div>
+}

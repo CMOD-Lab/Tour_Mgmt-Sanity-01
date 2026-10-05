@@ -1,0 +1,49 @@
+@page
+@model TourManagement.Web.Pages.Bookings.CreateModel
+@{
+    ViewData["Title"] = "Book a Tour";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <h1>Book a Tour</h1>
+        <hr />
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <input type="hidden" asp-for="Booking.TourId" />
+
+                    <div class="mb-3">
+                        <label asp-for="Booking.TourName" class="form-label"></label>
+                        <input asp-for="Booking.TourName" class="form-control" />
+                        <span asp-validation-for="Booking.TourName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Booking.Place" class="form-label"></label>
+                        <input asp-for="Booking.Place" class="form-control" placeholder="Your city/departure place" />
+                        <span asp-validation-for="Booking.Place" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Booking.FirstName" class="form-label"></label>
+                        <input asp-for="Booking.FirstName" class="form-control" placeholder="Your full name" />
+                        <span asp-validation-for="Booking.FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Booking.Email" class="form-label">Email Address</label>
+                        <input asp-for="Booking.Email" class="form-control" placeholder="Your email address" />
+                        <span asp-validation-for="Booking.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">Confirm Booking</button>
+                        <a asp-page="/Tours/Index" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
