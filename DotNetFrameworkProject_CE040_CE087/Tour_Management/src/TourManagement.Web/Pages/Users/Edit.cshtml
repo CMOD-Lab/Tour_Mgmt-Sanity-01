@@ -1,0 +1,79 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Users.EditModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Edit User</h1>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                        <input type="hidden" asp-for="UserInput.Id" />
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="UserInput.FirstName" class="form-label fw-bold"></label>
+                                <input asp-for="UserInput.FirstName" class="form-control" />
+                                <span asp-validation-for="UserInput.FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="UserInput.LastName" class="form-label fw-bold"></label>
+                                <input asp-for="UserInput.LastName" class="form-control" />
+                                <span asp-validation-for="UserInput.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserInput.Gender" class="form-label fw-bold"></label>
+                            <select asp-for="UserInput.Gender" class="form-select">
+                                <option value="">-- Select Gender --</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserInput.DateOfBirth" class="form-label fw-bold"></label>
+                            <input asp-for="UserInput.DateOfBirth" class="form-control" type="date" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="UserInput.Street" class="form-label fw-bold"></label>
+                            <input asp-for="UserInput.Street" class="form-control" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="UserInput.City" class="form-label fw-bold"></label>
+                                <input asp-for="UserInput.City" class="form-control" />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="UserInput.State" class="form-label fw-bold"></label>
+                                <input asp-for="UserInput.State" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input asp-for="UserInput.IsActive" class="form-check-input" type="checkbox" />
+                            <label asp-for="UserInput.IsActive" class="form-check-label">Active</label>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <a asp-page="Index" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

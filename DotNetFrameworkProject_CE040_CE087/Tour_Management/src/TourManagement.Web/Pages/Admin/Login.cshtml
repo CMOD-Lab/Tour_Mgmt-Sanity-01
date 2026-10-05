@@ -1,0 +1,49 @@
+@page
+@model TourManagement.Web.Pages.Admin.LoginModel
+@{
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4><i class="bi bi-shield-lock"></i> Admin Login</h4>
+                </div>
+                <div class="card-body p-4">
+                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        <div class="alert alert-danger">@Model.ErrorMessage</div>
+                    }
+
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="AdminInput.Email" class="form-label fw-bold"></label>
+                            <input asp-for="AdminInput.Email" class="form-control" placeholder="Admin email" />
+                            <span asp-validation-for="AdminInput.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="AdminInput.Password" class="form-label fw-bold"></label>
+                            <input asp-for="AdminInput.Password" class="form-control" placeholder="Admin password" />
+                            <span asp-validation-for="AdminInput.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger btn-lg">
+                                <i class="bi bi-box-arrow-in-right"></i> Admin Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

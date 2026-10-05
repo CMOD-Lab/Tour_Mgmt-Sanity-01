@@ -1,0 +1,90 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DetailsModel
+@{
+    ViewData["Title"] = Model.Tour?.TourName ?? "Tour Details";
+}
+
+<div class="container mt-4">
+    @if (Model.Tour == null)
+    {
+        <div class="alert alert-warning">Tour not found.</div>
+        <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+    }
+    else
+    {
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-page="Index">Tours</a></li>
+                <li class="breadcrumb-item active">@Model.Tour.TourName</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-md-6">
+                @if (!string.IsNullOrEmpty(Model.Tour.PictureName))
+                {
+                    <img src="/Tour_pics/@Model.Tour.PictureName" class="img-fluid rounded shadow"
+                         alt="@Model.Tour.TourName" style="max-height: 400px; width: 100%; object-fit: cover;">
+                }
+                else
+                {
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                         style="height: 400px;">
+                        <i class="bi bi-image text-secondary" style="font-size: 5rem;"></i>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <h1 class="mb-3">@Model.Tour.TourName</h1>
+
+                <div class="mb-3">
+                    <span class="badge bg-primary fs-6">₹@Model.Tour.Price.ToString("N2")</span>
+                </div>
+
+                <table class="table table-borderless">
+                    <tr>
+                        <th><i class="bi bi-geo-alt-fill text-danger"></i> Destination</th>
+                        <td>@Model.Tour.Place</td>
+                    </tr>
+                    <tr>
+                        <th><i class="bi bi-clock text-info"></i> Duration</th>
+                        <td>@Model.Tour.Days days</td>
+                    </tr>
+                    <tr>
+                        <th><i class="bi bi-pin-map text-success"></i> Locations</th>
+                        <td>@Model.Tour.Locations</td>
+                    </tr>
+                </table>
+
+                <h5>About This Tour</h5>
+                <p class="text-muted">@Model.Tour.TourInfo</p>
+
+                <div class="d-flex gap-2 mt-4">
+                    <a asp-page="/Bookings/Create"
+                       asp-route-tourId="@Model.Tour.Id"
+                       asp-route-tourName="@Model.Tour.TourName"
+                       asp-route-place="@Model.Tour.Place"
+                       class="btn btn-success btn-lg">
+                        <i class="bi bi-calendar-plus"></i> Book This Tour
+                    </a>
+                    <a asp-page="Index" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-arrow-left"></i> Back
+                    </a>
+                </div>
+
+                @if (HttpContext.Session.GetString("IsAdmin") == "true")
+                {
+                    <div class="mt-3 d-flex gap-2">
+                        <a asp-page="Edit" asp-route-id="@Model.Tour.Id" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Edit
+                        </a>
+                        <a asp-page="Delete" asp-route-id="@Model.Tour.Id" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

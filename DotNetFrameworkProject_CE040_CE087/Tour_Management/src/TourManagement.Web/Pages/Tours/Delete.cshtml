@@ -1,0 +1,52 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DeleteModel
+@{
+    ViewData["Title"] = "Delete Tour";
+}
+
+<div class="container mt-4">
+    <h1 class="text-danger mb-4">Delete Tour</h1>
+
+    @if (Model.Tour == null)
+    {
+        <div class="alert alert-warning">Tour not found.</div>
+        <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Confirm Deletion</h4>
+            <p>Are you sure you want to delete the following tour? This action cannot be undone.</p>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Tour Name</dt>
+                    <dd class="col-sm-9">@Model.Tour.TourName</dd>
+
+                    <dt class="col-sm-3">Place</dt>
+                    <dd class="col-sm-9">@Model.Tour.Place</dd>
+
+                    <dt class="col-sm-3">Duration</dt>
+                    <dd class="col-sm-9">@Model.Tour.Days days</dd>
+
+                    <dt class="col-sm-3">Price</dt>
+                    <dd class="col-sm-9">₹@Model.Tour.Price.ToString("N2")</dd>
+                </dl>
+            </div>
+        </div>
+
+        <form method="post">
+            <input type="hidden" asp-for="Tour.Id" />
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-danger">
+                    <i class="bi bi-trash"></i> Yes, Delete
+                </button>
+                <a asp-page="Details" asp-route-id="@Model.Tour.Id" class="btn btn-outline-secondary">
+                    <i class="bi bi-x-circle"></i> Cancel
+                </a>
+            </div>
+        </form>
+    }
+</div>

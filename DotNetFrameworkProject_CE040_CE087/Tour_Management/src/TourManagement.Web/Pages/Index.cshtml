@@ -1,0 +1,86 @@
+@page
+@model TourManagement.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Tour Management - Home";
+}
+
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="jumbotron jumbotron-fluid text-white text-center py-5"
+         style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/jumbotron.jpg') center/cover no-repeat; min-height: 400px; display: flex; align-items: center;">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Welcome to Tour Management</h1>
+            <p class="lead">Discover amazing tours and book your dream vacation today!</p>
+            <a asp-page="/Tours/Index" class="btn btn-primary btn-lg me-2">Browse Tours</a>
+            <a asp-page="/Users/Register" class="btn btn-outline-light btn-lg">Sign Up</a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-map fs-1 text-primary"></i>
+                    <h5 class="card-title mt-3">Explore Destinations</h5>
+                    <p class="card-text">Browse our wide selection of tour packages to amazing destinations.</p>
+                    <a asp-page="/Tours/Index" class="btn btn-outline-primary">View Tours</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-calendar-check fs-1 text-success"></i>
+                    <h5 class="card-title mt-3">Easy Booking</h5>
+                    <p class="card-text">Book your tour in just a few clicks with our simple booking system.</p>
+                    <a asp-page="/Users/Login" class="btn btn-outline-success">Book Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-person-circle fs-1 text-info"></i>
+                    <h5 class="card-title mt-3">Manage Profile</h5>
+                    <p class="card-text">View and manage your bookings and personal profile.</p>
+                    <a asp-page="/Users/Profile" class="btn btn-outline-info">My Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.FeaturedTours.Any())
+    {
+        <h2 class="text-center mb-4">Featured Tours</h2>
+        <div class="row">
+            @foreach (var tour in Model.FeaturedTours)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        @if (!string.IsNullOrEmpty(tour.PictureName))
+                        {
+                            <img src="/Tour_pics/@tour.PictureName" class="card-img-top" alt="@tour.TourName" style="height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <i class="bi bi-image text-white fs-1"></i>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@tour.TourName</h5>
+                            <p class="card-text text-muted"><i class="bi bi-geo-alt"></i> @tour.Place</p>
+                            <p class="card-text"><i class="bi bi-clock"></i> @tour.Days days</p>
+                            <p class="card-text fw-bold text-primary">₹@tour.Price.ToString("N2")</p>
+                        </div>
+                        <div class="card-footer">
+                            <a asp-page="/Tours/Details" asp-route-id="@tour.Id" class="btn btn-primary w-100">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
