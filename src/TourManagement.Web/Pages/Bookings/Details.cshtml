@@ -1,0 +1,62 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Bookings.DetailsModel
+@{
+    ViewData["Title"] = "Booking Details";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-page="/Bookings/MyBookings">My Bookings</a></li>
+            <li class="breadcrumb-item active">Booking Details</li>
+        </ol>
+    </nav>
+
+    @if (Model.Booking != null)
+    {
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="bi bi-calendar-check me-2"></i>Booking Confirmation</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="text-center mb-4">
+                            <i class="bi bi-check-circle-fill text-success" style="font-size: 3rem;"></i>
+                            <h4 class="mt-2">Booking #@Model.Booking.BookingId</h4>
+                            <span class="badge @(Model.Booking.IsActive ? "bg-success" : "bg-secondary") fs-6">
+                                @(Model.Booking.IsActive ? "Active" : "Cancelled")
+                            </span>
+                        </div>
+
+                        <dl class="row">
+                            <dt class="col-sm-4">Tour Name</dt>
+                            <dd class="col-sm-8"><strong>@Model.Booking.TourName</strong></dd>
+
+                            <dt class="col-sm-4">Destination</dt>
+                            <dd class="col-sm-8"><i class="bi bi-geo-alt-fill text-danger me-1"></i>@Model.Booking.Place</dd>
+
+                            <dt class="col-sm-4">Booked By</dt>
+                            <dd class="col-sm-8">@Model.Booking.FirstName</dd>
+
+                            <dt class="col-sm-4">Email</dt>
+                            <dd class="col-sm-8">@Model.Booking.Email</dd>
+
+                            <dt class="col-sm-4">Booking Date</dt>
+                            <dd class="col-sm-8">@Model.Booking.BookingDate.ToString("dd MMM yyyy, HH:mm")</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-page="/Bookings/MyBookings" class="btn btn-primary">
+                            <i class="bi bi-arrow-left me-2"></i>Back to My Bookings
+                        </a>
+                        <a asp-page="/Tours/Index" class="btn btn-outline-primary ms-2">
+                            <i class="bi bi-search me-2"></i>Browse More Tours
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

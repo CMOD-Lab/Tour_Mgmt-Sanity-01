@@ -1,0 +1,109 @@
+@page
+@model TourManagement.Web.Pages.Tours.IndexModel
+@{
+    ViewData["Title"] = "All Tours";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="bi bi-map-fill me-2 text-primary"></i>Available Tours</h2>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-page="/Tours/Create" class="btn btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Add New Tour
+            </a>
+        }
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i>@Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Search Form -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <form method="get" class="row g-3 align-items-end">
+                <div class="col-md-9">
+                    <label class="form-label fw-semibold">Search Tours</label>
+                    <input type="text" name="searchTerm" value="@Model.SearchTerm" class="form-control" placeholder="Search by tour name, place, or locations..." />
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-search me-2"></i>Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (!Model.Tours.Any())
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-search text-muted" style="font-size: 4rem;"></i>
+            <h4 class="mt-3 text-muted">No tours found</h4>
+            <p class="text-muted">@(string.IsNullOrEmpty(Model.SearchTerm) ? "No tours are currently available." : $"No tours match '{Model.SearchTerm}'.")</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var tour in Model.Tours)
+            {
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        @if (!string.IsNullOrEmpty(tour.Pic))
+                        {
+                            <img src="/Tour_pics/@tour.Pic" class="card-img-top" alt="@tour.TourName" style="height: 200px; object-fit: cover;" onerror="this.src='/images/default-tour.jpg'">
+                        }
+                        else
+                        {
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <i class="bi bi-image text-secondary" style="font-size: 3rem;"></i>
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">@tour.TourName</h5>
+                            <p class="card-text">
+                                <i class="bi bi-geo-alt-fill text-danger me-1"></i><strong>@tour.Place</strong>
+                            </p>
+                            <p class="card-text small text-muted">
+                                <i class="bi bi-pin-map me-1"></i>@tour.Locations
+                            </p>
+                            <div class="d-flex gap-2 mb-2">
+                                <span class="badge bg-info"><i class="bi bi-calendar3 me-1"></i>@tour.Days Days</span>
+                                <span class="badge bg-success"><i class="bi bi-currency-rupee me-1"></i>@tour.Price.ToString("N0")</span>
+                            </div>
+                            <p class="card-text small">@(tour.TourInfo.Length > 80 ? tour.TourInfo[..80] + "..." : tour.TourInfo)</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex gap-2">
+                                <a asp-page="/Tours/Details" asp-route-id="@tour.TourId" class="btn btn-primary btn-sm flex-fill">
+                                    <i class="bi bi-eye me-1"></i>Details
+                                </a>
+                                @if (User.Identity?.IsAuthenticated == true)
+                                {
+                                    <a asp-page="/Bookings/Create" asp-route-tourId="@tour.TourId" class="btn btn-success btn-sm flex-fill">
+                                        <i class="bi bi-calendar-plus me-1"></i>Book
+                                    </a>
+                                }
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a asp-page="/Tours/Edit" asp-route-id="@tour.TourId" class="btn btn-warning btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-page="/Tours/Delete" asp-route-id="@tour.TourId" class="btn btn-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

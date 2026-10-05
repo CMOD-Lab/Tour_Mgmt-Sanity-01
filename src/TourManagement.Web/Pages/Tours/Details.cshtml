@@ -1,0 +1,97 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DetailsModel
+@{
+    ViewData["Title"] = Model.Tour?.TourName ?? "Tour Details";
+}
+
+<div class="container mt-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-page="/Tours/Index">Tours</a></li>
+            <li class="breadcrumb-item active">@Model.Tour?.TourName</li>
+        </ol>
+    </nav>
+
+    @if (Model.Tour != null)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                @if (!string.IsNullOrEmpty(Model.Tour.Pic))
+                {
+                    <img src="/Tour_pics/@Model.Tour.Pic" class="img-fluid rounded shadow" alt="@Model.Tour.TourName" onerror="this.src='/images/default-tour.jpg'">
+                }
+                else
+                {
+                    <div class="bg-light rounded d-flex align-items-center justify-content-center shadow" style="height: 350px;">
+                        <i class="bi bi-image text-secondary" style="font-size: 5rem;"></i>
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-3">@Model.Tour.TourName</h2>
+                <div class="d-flex gap-3 mb-3">
+                    <span class="badge bg-info fs-6 px-3 py-2">
+                        <i class="bi bi-calendar3 me-1"></i>@Model.Tour.Days Days
+                    </span>
+                    <span class="badge bg-success fs-6 px-3 py-2">
+                        <i class="bi bi-currency-rupee me-1"></i>@Model.Tour.Price.ToString("N0")
+                    </span>
+                </div>
+
+                <table class="table table-borderless">
+                    <tr>
+                        <th class="text-muted" style="width: 140px;"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>Place</th>
+                        <td><strong>@Model.Tour.Place</strong></td>
+                    </tr>
+                    <tr>
+                        <th class="text-muted"><i class="bi bi-pin-map me-2 text-primary"></i>Locations</th>
+                        <td>@Model.Tour.Locations</td>
+                    </tr>
+                    <tr>
+                        <th class="text-muted"><i class="bi bi-info-circle me-2 text-info"></i>Tour Info</th>
+                        <td>@Model.Tour.TourInfo</td>
+                    </tr>
+                </table>
+
+                <div class="d-flex gap-3 mt-4">
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <a asp-page="/Bookings/Create" asp-route-tourId="@Model.Tour.TourId" class="btn btn-success btn-lg">
+                            <i class="bi bi-calendar-plus me-2"></i>Book This Tour
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-page="/Account/Login" asp-route-returnUrl="@Url.Page("/Tours/Details", new { id = Model.Tour.TourId })" class="btn btn-success btn-lg">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Login to Book
+                        </a>
+                    }
+                    <a asp-page="/Tours/Index" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Tours
+                    </a>
+                </div>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <div class="mt-3 d-flex gap-2">
+                        <a asp-page="/Tours/Edit" asp-route-id="@Model.Tour.TourId" class="btn btn-warning">
+                            <i class="bi bi-pencil me-2"></i>Edit
+                        </a>
+                        <a asp-page="/Tours/Delete" asp-route-id="@Model.Tour.TourId" class="btn btn-danger">
+                            <i class="bi bi-trash me-2"></i>Delete
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-exclamation-triangle text-warning" style="font-size: 4rem;"></i>
+            <h4 class="mt-3">Tour not found</h4>
+            <a asp-page="/Tours/Index" class="btn btn-primary mt-3">Back to Tours</a>
+        </div>
+    }
+</div>

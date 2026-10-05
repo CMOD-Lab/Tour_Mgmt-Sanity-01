@@ -1,0 +1,34 @@
+/* Tour Management - Site CSS */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.table th {
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 0.8rem;
+}
