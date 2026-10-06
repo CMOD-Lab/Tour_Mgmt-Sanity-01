@@ -1,0 +1,64 @@
+@page "{id:int}"
+@model TourManagement.Web.Pages.Tours.DetailsModel
+@{
+    ViewData["Title"] = Model.Tour?.TourName ?? "Tour Details";
+}
+
+@if (Model.Tour == null)
+{
+    <div class="alert alert-warning">Tour not found.</div>
+    <a asp-page="Index" class="btn btn-secondary">Back to Tours</a>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h1>@Model.Tour.TourName</h1>
+            <p class="text-muted"><i class="bi bi-geo-alt"></i> @Model.Tour.Place</p>
+
+            @if (!string.IsNullOrEmpty(Model.Tour.PicturePath))
+            {
+                <img src="/images/tours/@Model.Tour.PicturePath" class="img-fluid rounded mb-3" alt="@Model.Tour.TourName" />
+            }
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Tour Information</h5>
+                    <p class="card-text">@Model.Tour.TourInfo</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Locations Covered</h5>
+                    <p class="card-text">@Model.Tour.Locations</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h5 class="card-title">Tour Summary</h5>
+                    <table class="table table-borderless">
+                        <tr>
+                            <td><strong>Duration:</strong></td>
+                            <td>@Model.Tour.Days days</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Price:</strong></td>
+                            <td class="text-success fs-5"><strong>$@Model.Tour.Price.ToString("N2")</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Place:</strong></td>
+                            <td>@Model.Tour.Place</td>
+                        </tr>
+                    </table>
+                    <a asp-page="/Bookings/Create" asp-route-tourId="@Model.Tour.Id" class="btn btn-success w-100 mb-2">
+                        Book This Tour
+                    </a>
+                    <a asp-page="Index" class="btn btn-outline-secondary w-100">Back to Tours</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
