@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="dcc14c0d-eef0-40ee-97a0-e725edd6dbd2" name="@12de3fdc4f5a 2026-10-06 22:55:07" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2026-10-06T22:55:07.9960150+00:00" queuing="2026-10-06T22:55:07.9960150+00:00" start="2026-10-06T22:55:06.6276575+00:00" finish="2026-10-06T22:55:08.0022212+00:00" />
+  <TestSettings name="default" id="7f22ec2f-7fa9-4f1b-9263-3da2e4009085">
+    <Deployment runDeploymentRoot="_12de3fdc4f5a_2026-10-06_22_55_07" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="f76c0788-5c21-4ebd-bba7-018c8aeef683" testId="1d0def80-44da-4345-259b-2abe747c54a9" testName="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.DeleteAsync_ShouldSoftDeleteTour" computerName="12de3fdc4f5a" duration="00:00:00.0303999" startTime="2026-10-06T22:55:07.8630496+00:00" endTime="2026-10-06T22:55:07.8630497+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f76c0788-5c21-4ebd-bba7-018c8aeef683" />
+    <UnitTestResult executionId="5f8653b6-ed7d-4898-9be1-e846e107d59e" testId="2af14891-d358-b7ae-5b1c-1b8f34b17daa" testName="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.GetAllAsync_ShouldReturnOnlyActiveTours" computerName="12de3fdc4f5a" duration="00:00:00.0054731" startTime="2026-10-06T22:55:07.8920676+00:00" endTime="2026-10-06T22:55:07.8920678+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5f8653b6-ed7d-4898-9be1-e846e107d59e" />
+    <UnitTestResult executionId="46147502-d338-4518-8057-b2de40d101d0" testId="db26dc06-1d26-b3a6-da90-6bd59a397494" testName="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.AddAsync_ShouldAddTourToDatabase" computerName="12de3fdc4f5a" duration="00:00:00.0018093" startTime="2026-10-06T22:55:07.8865253+00:00" endTime="2026-10-06T22:55:07.8865254+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="46147502-d338-4518-8057-b2de40d101d0" />
+    <UnitTestResult executionId="97b190be-f3ec-40fa-8fd6-fcb19ea88c91" testId="e90b7024-795a-e5b5-8f58-5b9ab1a630a0" testName="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.GetByIdAsync_WithValidId_ShouldReturnTour" computerName="12de3fdc4f5a" duration="00:00:00.0215712" startTime="2026-10-06T22:55:07.8846454+00:00" endTime="2026-10-06T22:55:07.8846455+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="97b190be-f3ec-40fa-8fd6-fcb19ea88c91" />
+    <UnitTestResult executionId="3d0d74f5-ce12-4df6-9d65-ccb25d5dbbd8" testId="e520709c-54df-8a40-ecc3-20843675f1d7" testName="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.SearchAsync_ShouldReturnMatchingTours" computerName="12de3fdc4f5a" duration="00:00:00.6341599" startTime="2026-10-06T22:55:07.8336175+00:00" endTime="2026-10-06T22:55:07.8336448+00:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3d0d74f5-ce12-4df6-9d65-ccb25d5dbbd8" />
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.DeleteAsync_ShouldSoftDeleteTour" storage="/modernize-data/studio-data/tnt1001/app520735/transformed-code/124/studio-workspace/main-monolith/dotnetframeworkproject_ce040_ce087/tour_management/tests/tourmanagement.integrationtests/bin/debug/net8.0/tourmanagement.integrationtests.dll" id="1d0def80-44da-4345-259b-2abe747c54a9">
+      <Execution id="f76c0788-5c21-4ebd-bba7-018c8aeef683" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/bin/Debug/net8.0/TourManagement.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.IntegrationTests.Repositories.TourRepositoryTests" name="DeleteAsync_ShouldSoftDeleteTour" />
+    </UnitTest>
+    <UnitTest name="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.GetByIdAsync_WithValidId_ShouldReturnTour" storage="/modernize-data/studio-data/tnt1001/app520735/transformed-code/124/studio-workspace/main-monolith/dotnetframeworkproject_ce040_ce087/tour_management/tests/tourmanagement.integrationtests/bin/debug/net8.0/tourmanagement.integrationtests.dll" id="e90b7024-795a-e5b5-8f58-5b9ab1a630a0">
+      <Execution id="97b190be-f3ec-40fa-8fd6-fcb19ea88c91" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/bin/Debug/net8.0/TourManagement.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.IntegrationTests.Repositories.TourRepositoryTests" name="GetByIdAsync_WithValidId_ShouldReturnTour" />
+    </UnitTest>
+    <UnitTest name="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.SearchAsync_ShouldReturnMatchingTours" storage="/modernize-data/studio-data/tnt1001/app520735/transformed-code/124/studio-workspace/main-monolith/dotnetframeworkproject_ce040_ce087/tour_management/tests/tourmanagement.integrationtests/bin/debug/net8.0/tourmanagement.integrationtests.dll" id="e520709c-54df-8a40-ecc3-20843675f1d7">
+      <Execution id="3d0d74f5-ce12-4df6-9d65-ccb25d5dbbd8" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/bin/Debug/net8.0/TourManagement.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.IntegrationTests.Repositories.TourRepositoryTests" name="SearchAsync_ShouldReturnMatchingTours" />
+    </UnitTest>
+    <UnitTest name="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.GetAllAsync_ShouldReturnOnlyActiveTours" storage="/modernize-data/studio-data/tnt1001/app520735/transformed-code/124/studio-workspace/main-monolith/dotnetframeworkproject_ce040_ce087/tour_management/tests/tourmanagement.integrationtests/bin/debug/net8.0/tourmanagement.integrationtests.dll" id="2af14891-d358-b7ae-5b1c-1b8f34b17daa">
+      <Execution id="5f8653b6-ed7d-4898-9be1-e846e107d59e" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/bin/Debug/net8.0/TourManagement.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.IntegrationTests.Repositories.TourRepositoryTests" name="GetAllAsync_ShouldReturnOnlyActiveTours" />
+    </UnitTest>
+    <UnitTest name="TourManagement.IntegrationTests.Repositories.TourRepositoryTests.AddAsync_ShouldAddTourToDatabase" storage="/modernize-data/studio-data/tnt1001/app520735/transformed-code/124/studio-workspace/main-monolith/dotnetframeworkproject_ce040_ce087/tour_management/tests/tourmanagement.integrationtests/bin/debug/net8.0/tourmanagement.integrationtests.dll" id="db26dc06-1d26-b3a6-da90-6bd59a397494">
+      <Execution id="46147502-d338-4518-8057-b2de40d101d0" />
+      <TestMethod codeBase="/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/bin/Debug/net8.0/TourManagement.IntegrationTests.dll" adapterTypeName="executor://xunit/VsTestRunner2/netcoreapp" className="TourManagement.IntegrationTests.Repositories.TourRepositoryTests" name="AddAsync_ShouldAddTourToDatabase" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="1d0def80-44da-4345-259b-2abe747c54a9" executionId="f76c0788-5c21-4ebd-bba7-018c8aeef683" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2af14891-d358-b7ae-5b1c-1b8f34b17daa" executionId="5f8653b6-ed7d-4898-9be1-e846e107d59e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db26dc06-1d26-b3a6-da90-6bd59a397494" executionId="46147502-d338-4518-8057-b2de40d101d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e90b7024-795a-e5b5-8f58-5b9ab1a630a0" executionId="97b190be-f3ec-40fa-8fd6-fcb19ea88c91" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e520709c-54df-8a40-ecc3-20843675f1d7" executionId="3d0d74f5-ce12-4df6-9d65-ccb25d5dbbd8" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="5" executed="5" passed="5" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.6+bf9b858c26 (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.07]   Discovering: TourManagement.IntegrationTests
+[xUnit.net 00:00:00.10]   Discovered:  TourManagement.IntegrationTests
+[xUnit.net 00:00:00.10]   Starting:    TourManagement.IntegrationTests
+[xUnit.net 00:00:00.84]   Finished:    TourManagement.IntegrationTests
+</StdOut>
+    </Output>
+  </ResultSummary>
+</TestRun>

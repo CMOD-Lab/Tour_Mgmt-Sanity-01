@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Q6ND+9VB+p4=",
+  "dgSpecHash": "ht6BCfoIpeE=",
   "success": true,
   "projectFilePath": "/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.IntegrationTests/TourManagement.IntegrationTests.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "/app/.nuget/packages/azure.identity/1.7.0/azure.identity.1.7.0.nupkg.sha512",
     "/app/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/app/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
+    "/app/.nuget/packages/coverlet.msbuild/10.1.0/coverlet.msbuild.10.1.0.nupkg.sha512",
     "/app/.nuget/packages/fluentassertions/6.12.0/fluentassertions.6.12.0.nupkg.sha512",
     "/app/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
     "/app/.nuget/packages/microsoft.aspnetcore.mvc.testing/8.0.0/microsoft.aspnetcore.mvc.testing.8.0.0.nupkg.sha512",

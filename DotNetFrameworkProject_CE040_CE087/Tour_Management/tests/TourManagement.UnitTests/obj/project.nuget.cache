@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NV04EkU4EiA=",
+  "dgSpecHash": "tMNOpF0YOpY=",
   "success": true,
   "projectFilePath": "/modernize-data/studio-data/TNT1001/APP520735/transformed-code/124/studio-workspace/Main-Monolith/DotNetFrameworkProject_CE040_CE087/Tour_Management/tests/TourManagement.UnitTests/TourManagement.UnitTests.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/app/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "/app/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/app/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",
+    "/app/.nuget/packages/coverlet.msbuild/10.1.0/coverlet.msbuild.10.1.0.nupkg.sha512",
     "/app/.nuget/packages/fluentassertions/6.12.0/fluentassertions.6.12.0.nupkg.sha512",
     "/app/.nuget/packages/fluentvalidation/11.9.0/fluentvalidation.11.9.0.nupkg.sha512",
     "/app/.nuget/packages/microsoft.codecoverage/17.9.0/microsoft.codecoverage.17.9.0.nupkg.sha512",
