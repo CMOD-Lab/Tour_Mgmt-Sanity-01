@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Tour_Management
 {
@@ -22,7 +21,8 @@ namespace Tour_Management
         }
         public void refreshdata()
         {
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+            // cz-dotnet-0055: Replaced Web.config XDT transform-based connection string with environment variable
+            SqlConnection conn = new SqlConnection(System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
             conn.Open();
             string insertQuery = "select * from Tour";
             SqlCommand com = new SqlCommand(insertQuery, conn);

@@ -1,0 +1,84 @@
+# .dockerignore for Tour_Management ASP.NET Web Forms Application
+# Excludes source code, PDB files, temp artifacts and unnecessary files
+# to reduce Windows container image size when deployed to EKS.
+#
+# NOTE: *.csproj, *.sln, and packages.config are intentionally NOT excluded here
+# because they are required by the Docker build stage (msbuild and nuget restore).
+
+# ---------------------------------------------------------------
+# Build output directories (rebuilt inside Docker multi-stage)
+# ---------------------------------------------------------------
+bin/
+obj/
+
+# ---------------------------------------------------------------
+# PDB / debug symbol files — bloat container image unnecessarily
+# ---------------------------------------------------------------
+*.pdb
+*.mdb
+
+# ---------------------------------------------------------------
+# Visual Studio IDE / user-specific files
+# ---------------------------------------------------------------
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.DotSettings
+*.DotSettings.user
+
+# ---------------------------------------------------------------
+# NuGet packages directory (restored during Docker build stage)
+# ---------------------------------------------------------------
+packages/
+
+# ---------------------------------------------------------------
+# Temporary and cache files
+# ---------------------------------------------------------------
+*.tmp
+*.temp
+*.cache
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# ---------------------------------------------------------------
+# Log files
+# ---------------------------------------------------------------
+*.log
+
+# ---------------------------------------------------------------
+# Test results and coverage reports
+# ---------------------------------------------------------------
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# ---------------------------------------------------------------
+# App_Data — local database files not needed in container
+# ---------------------------------------------------------------
+App_Data/
+
+# ---------------------------------------------------------------
+# Markdown and documentation
+# ---------------------------------------------------------------
+*.md
+docs/
+
+# ---------------------------------------------------------------
+# Docker files themselves (not needed inside the image)
+# ---------------------------------------------------------------
+Dockerfile
+.dockerignore
+
+# ---------------------------------------------------------------
+# Scripts directory
+# ---------------------------------------------------------------
+scripts/
+
+# ---------------------------------------------------------------
+# Kubernetes manifests
+# ---------------------------------------------------------------
+kubernetes/

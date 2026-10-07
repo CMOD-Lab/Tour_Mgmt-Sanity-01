@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -22,7 +21,8 @@ namespace Tour_Management
             
                
 
-                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+                // cz-dotnet-0055: Replaced Web.config XDT transform-based connection string with environment variable
+                SqlConnection conn = new SqlConnection(System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
                 conn.Open();
                 string checkPasswordQuery = "select password from Userinfo where password='" + txtPassword.Text + "' and email = '" + txtEmail.Text + "'";
                 SqlCommand passComm = new SqlCommand(checkPasswordQuery, conn);

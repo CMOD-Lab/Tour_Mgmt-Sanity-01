@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -18,7 +17,8 @@ namespace Tour_Management
 
         protected void btn_click(object sender, EventArgs e)
         {
-               SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbconnection"].ConnectionString);
+               // cz-dotnet-0055: Replaced Web.config XDT transform-based connection string with environment variable
+               SqlConnection conn = new SqlConnection(System.Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"));
                 conn.Open();
                 string insertQuery = "insert into booking(TOUR_NAME,PLACE,Email,FirstName) values(@TOUR_NAME,@PLACE,@Email,@FirstName)";
                 SqlCommand com = new SqlCommand(insertQuery, conn);

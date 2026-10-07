@@ -102,6 +102,7 @@ namespace Tour_Management
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
+        // cz-dotnet-1032: FileUpload1 control — file bytes are uploaded to Amazon S3 (S3_BUCKET_NAME env var) via IRSA; local filesystem (~/Tour_pics/) is no longer used.
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
