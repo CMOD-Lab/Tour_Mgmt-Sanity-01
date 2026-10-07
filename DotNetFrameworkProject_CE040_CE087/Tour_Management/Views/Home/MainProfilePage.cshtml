@@ -1,0 +1,86 @@
+@* 
+    Razor View replacing MainProfilePage.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET Core MVC Razor Page.
+    Original: MainProfilePage.aspx + MainProfilePage.aspx.cs (System.Web.UI.Page)
+    Replaced by: HomeController.MainProfilePage (GET) + this view
+*@
+@{
+    ViewBag.Title = "Main Profile Page";
+}
+
+<style>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li {
+        float: left;
+        border-right: 1px solid #bbb;
+    }
+    li:last-child {
+        border-right: none;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+    .active {
+        background-color: #04AA6D;
+    }
+    .body {
+        background-image: none;
+    }
+    .tour {
+        background-image: url('~/pics/homepage.jpg');
+        background-size: cover;
+        text-align: center;
+        color: white;
+        height: 500px;
+        background-color: white;
+        opacity: 0.8;
+        justify-content: center;
+        vertical-align: central;
+    }
+    .tour h2 {
+        align-items: center;
+    }
+    .label-info {
+        color: white;
+        background-color: black;
+        opacity: 0.7;
+        padding-left: 50px;
+        align-content: center;
+    }
+</style>
+
+<ul class="nav navbar-nav navbar-left">
+    <li><a href="@Url.Action("UserCrud", "User")"><span class="glyphicons glyphicons-home"></span>Profile</a></li>
+    <li><a href="@Url.Action("DisplayTours", "Tour")">Tours</a></li>
+    <li><a href="@Url.Action("Order", "Order")">Book Tour</a></li>
+    <li><a href="@Url.Action("MyBooking", "Booking")">Bookings info</a></li>
+</ul>
+
+<div class="welcome" style="text-align:center">
+    @ViewBag.WelcomeMessage
+</div>
+
+<div class="tour">
+    <h2>
+        <br /><br /><br />
+        <a href="@Url.Action("DisplayTours", "Tour")" class="btn btn-primary" style="width:300px; height:50px; font-size:x-large;">Explore the Tours!</a>
+        <br /><br /><br />
+        <p class="label-info">
+            Find the best tour packages without any hustle.<br />
+            Book and pack your lugguage.
+        </p>
+    </h2>
+</div>

@@ -1,0 +1,71 @@
+@model IEnumerable<Tour_Management.Models.TourViewModel>
+@* 
+    Razor View replacing DisplayTours.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET Core MVC Razor Page.
+    Original: DisplayTours.aspx (SqlDataSource + GridView controls) + DisplayTours.aspx.cs
+    Replaced by: TourController.DisplayTours (GET) + this view
+*@
+@{
+    ViewBag.Title = "Display Tours";
+}
+
+<style type="text/css">
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: #6B696B;
+        color: white;
+        font-weight: bold;
+        padding: 8px;
+    }
+    tr:nth-child(even) {
+        background-color: #F7F7DE;
+    }
+    tr:nth-child(odd) {
+        background-color: white;
+    }
+    td {
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    img.tour-pic {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+</style>
+
+<div style="margin: 21px 130px 0 13px;">
+    <table class="table" style="width:875px;">
+        <thead>
+            <tr>
+                <th>TOUR_NAME</th>
+                <th>DAYS</th>
+                <th>LOCATIONS</th>
+                <th>TOUR_ID</th>
+                <th>pic</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tour in Model)
+            {
+                <tr>
+                    <td>@tour.TourName</td>
+                    <td>@tour.Days</td>
+                    <td>@tour.Locations</td>
+                    <td>@tour.TourId</td>
+                    <td>
+                        <img src="~/Tour_pics/@tour.Pic" class="tour-pic" alt="@tour.TourName" />
+                    </td>
+                    <td>
+                        @Html.ActionLink("Book Now", "Order", "Order")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

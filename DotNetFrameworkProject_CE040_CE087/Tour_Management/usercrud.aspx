@@ -1,41 +1,26 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %>
+<%--
+    usercrud.aspx - cr-dotnet-1034: Synchronous Data Binding in GridView Controls
+    The synchronous asp:GridView (line 11) and asp:SqlDataSource (line 30) controls
+    have been replaced with async Task-based data access using Entity Framework Core
+    connected to Amazon RDS, preventing thread pool exhaustion under cloud load.
 
-<!DOCTYPE html>
+    This Web Form has been replaced by:
+      - Controller: UserController.UserCrudAsync (GET) - async EF Core data access
+      - View: Views/User/UserCrud.cshtml - Razor table replacing synchronous GridView
+      - Model: Models/UserInfoViewModel
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Email" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
-        <AlternatingRowStyle BackColor="White" />
-        <Columns>
-            <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" SortExpression="Email" />
-            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-            <asp:BoundField DataField="Gender" HeaderText="Gender" SortExpression="Gender" />
-            <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
-            <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
-        </Columns>
-        <FooterStyle BackColor="#CCCC99" />
-        <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-        <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
-        <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#FBFBF2" />
-        <SortedAscendingHeaderStyle BackColor="#848384" />
-        <SortedDescendingCellStyle BackColor="#EAEAD3" />
-        <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-   
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="Select top (select COUNT(*) from UserInfo) * From UserInfo
-EXCEPT
-Select top ((select COUNT(*) from UserInfo)-(1)) * From UserInfo"
-            
-            UpdateCommand="UPDATE [UserInfo] Set [Email]=@Email,[FirstName]=@FirstName,[LastName]=@LastName,[Gender]=@Gender,[Password]=@Password,[City]=@City Where [Email]=@Email"
-            ></asp:SqlDataSource>
-    </form>
-   
-</body>
-</html>
+    Original synchronous patterns removed:
+      - asp:GridView (line 11): synchronous data binding → replaced by async Razor table
+      - asp:SqlDataSource (line 30): synchronous DB binding → replaced by async EF Core query
+
+    This file is retained for backward compatibility only.
+    All new requests should use the MVC route: /User/UserCrud
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %>
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Redirect to the ASP.NET MVC equivalent route with async EF Core data binding
+        Response.RedirectPermanent("~/User/UserCrud");
+    }
+</script>

@@ -66,8 +66,24 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.300.4\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.307.4\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <!-- Legacy Web Forms pages (retained for backward-compat redirect only) -->
     <Content Include="AddTour.aspx" />
     <Content Include="AdminLogin2.aspx" />
     <Content Include="AdminProfile.aspx" />
@@ -85,8 +101,24 @@
     <Content Include="usercrud.aspx" />
     <Content Include="userlogin.aspx" />
     <Content Include="Web.config" />
+    <!-- ASP.NET MVC Razor Views (cr-dotnet-0026 migration) -->
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\UserCrud.cshtml" />
+    <Content Include="Views\Booking\TourCrud.cshtml" />
+    <Content Include="Views\Booking\AllBooking.cshtml" />
+    <Content Include="Views\Booking\MyBooking.cshtml" />
+    <Content Include="Views\Admin\Login.cshtml" />
+    <Content Include="Views\Admin\Profile.cshtml" />
+    <Content Include="Views\Home\MainProfilePage.cshtml" />
+    <Content Include="Views\Order\Order.cshtml" />
+    <Content Include="Views\Tour\AddTour.cshtml" />
+    <Content Include="Views\Tour\DisplayTours.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Legacy Web Forms code-behind files (retained for backward-compat redirect only) -->
     <Compile Include="AddTour.aspx.cs">
       <DependentUpon>AddTour.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -172,6 +204,20 @@
     <Compile Include="userlogin.aspx.designer.cs">
       <DependentUpon>userlogin.aspx</DependentUpon>
     </Compile>
+    <!-- ASP.NET MVC Controllers (cr-dotnet-0026 migration) -->
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\TourController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\BookingController.cs" />
+    <!-- ASP.NET MVC Models (cr-dotnet-0026 migration) -->
+    <Compile Include="Models\TourModels.cs" />
+    <!-- EF6 DbContext and Entities (cr-dotnet-1034: async data binding) -->
+    <Compile Include="Data\TourManagementDbContext.cs" />
+    <Compile Include="Data\TourEntities.cs" />
+    <!-- cr-dotnet-1041: Content Security Policy HttpModule -->
+    <Compile Include="Security\ContentSecurityPolicyModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -185,6 +231,18 @@
   <ItemGroup>
     <Folder Include="pics\" />
     <Folder Include="Tour_pics\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\" />
+    <Folder Include="Views\User\" />
+    <Folder Include="Views\Booking\" />
+    <Folder Include="Views\Admin\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Order\" />
+    <Folder Include="Views\Tour\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,84 @@
+@model Tour_Management.Models.OrderViewModel
+@* 
+    Razor View replacing Order.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET Core MVC Razor Page.
+    Original: Order.aspx + Order.aspx.cs (System.Web.UI.Page)
+    Replaced by: OrderController.Order (GET/POST) + this view
+*@
+@{
+    ViewBag.Title = "Confirm Tour";
+}
+
+<style>
+    .container {
+        text-align: center;
+        background-color: black;
+        width: 100%;
+        font-size: 30px;
+        color: white;
+        padding-bottom: 150px;
+        opacity: 0.8;
+    }
+</style>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<div class="container">
+    <div class="page-header">
+        <h1>Confirm Tour</h1>
+    </div>
+
+    @using (Html.BeginForm("Order", "Order", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.Name)</div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control", required = "true", style = "color:black" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.City)</div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", style = "color:black" })
+                    @Html.ValidationMessageFor(m => m.City)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.TourName)</div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(m => m.TourName, new { @class = "form-control", required = "true", style = "color:black" })
+                    @Html.ValidationMessageFor(m => m.TourName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.MobileNumber)</div>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(m => m.MobileNumber, new { @class = "form-control", required = "true", style = "color:black", type = "number" })
+                    @Html.ValidationMessageFor(m => m.MobileNumber)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-sm-2">
+                    <button type="submit" class="btn form-control" style="background-color:#cc6600; color:black;">Register</button>
+                </div>
+                <div class="control-label col-sm-2">
+                    <button type="reset" class="btn form-control" style="background-color:#cc6600; color:black;">Reset</button>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>

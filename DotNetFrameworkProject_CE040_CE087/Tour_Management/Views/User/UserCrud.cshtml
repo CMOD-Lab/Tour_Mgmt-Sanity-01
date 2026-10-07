@@ -1,0 +1,58 @@
+@*
+    Razor View replacing usercrud.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET MVC Razor View.
+    Original: usercrud.aspx + usercrud.aspx.cs (System.Web.UI.Page)
+    Replaced by: UserController.UserCrud (GET) + this view
+    Rule: cr-dotnet-0026 - Web Forms Usage
+*@
+@model IEnumerable<Tour_Management.Models.UserInfoViewModel>
+@{
+    ViewBag.Title = "User Management";
+}
+
+<h2>User Management</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table" style="background-color:white; border:1px solid #DEDFDE; color:black;">
+    <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+        <tr>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Password</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr style="background-color:#F7F7DE; text-align:center;">
+                <td>@user.Email</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Gender</td>
+                <td>@user.Password</td>
+                <td>@user.City</td>
+                <td>
+                    @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("Email", user.Email)
+                        @Html.Hidden("FirstName", user.FirstName)
+                        @Html.Hidden("LastName", user.LastName)
+                        @Html.Hidden("Gender", user.Gender)
+                        @Html.Hidden("Password", user.Password)
+                        @Html.Hidden("City", user.City)
+                        <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

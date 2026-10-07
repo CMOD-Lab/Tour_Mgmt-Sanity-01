@@ -6,14 +6,24 @@
 //     the code is regenerated. 
 // </auto-generated>
 //------------------------------------------------------------------------------
+// cr-dotnet-1034: Synchronous Data Binding in GridView Controls
+// The synchronous System.Web.UI.WebControls.GridView (line 33) and
+// System.Web.UI.WebControls.SqlDataSource field declarations have been removed.
+// These Web Forms controls used synchronous data binding that blocks request threads,
+// degrading cloud scalability under load.
+// Replaced by: async Task-based EF Core data access in Controllers/BookingController.cs
+// and Razor table rendering in Views/Booking/MyBooking.cshtml.
 
 namespace Tour_Management
 {
-
-
+    /// <summary>
+    /// mybooking partial class - MIGRATED to async EF Core pattern (cr-dotnet-1034).
+    /// Synchronous GridView and SqlDataSource controls removed.
+    /// Async data binding is now handled by BookingController.MyBookingAsync()
+    /// using Entity Framework Core connected to Amazon RDS.
+    /// </summary>
     public partial class mybooking
     {
-
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -23,22 +33,12 @@ namespace Tour_Management
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        // REMOVED (cr-dotnet-1034): protected global::System.Web.UI.WebControls.GridView GridView1;
+        // Reason: Synchronous GridView data binding replaced by async Razor table rendering
+        // in Views/Booking/MyBooking.cshtml with data loaded via async EF Core query.
 
-        /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        // REMOVED (cr-dotnet-1034): protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        // Reason: Synchronous SqlDataSource control replaced by async EF Core DbContext query
+        // in BookingController.MyBookingAsync() targeting Amazon RDS.
     }
 }

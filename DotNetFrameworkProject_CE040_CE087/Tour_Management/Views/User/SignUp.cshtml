@@ -1,0 +1,108 @@
+@*
+    Razor View replacing SignUpForm.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET MVC Razor View.
+    Original: SignUpForm.aspx + SignUpForm.aspx.cs (System.Web.UI.Page)
+    Replaced by: UserController.SignUp (GET/POST) + this view
+    Rule: cr-dotnet-0026 - Web Forms Usage
+*@
+@model Tour_Management.Models.SignUpViewModel
+@{
+    ViewBag.Title = "User Registration Form";
+}
+
+<style>
+    .container {
+        text-align: center;
+        background-color: black;
+        width: 100%;
+        font-size: 30px;
+        color: white;
+        padding-bottom: 150px;
+        opacity: 0.8;
+    }
+</style>
+
+<br />
+<br />
+
+<div class="container">
+    <div class="page-header">
+        <h1>User Registration Form</h1>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @using (Html.BeginForm("SignUp", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.Email)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "true", ForeColor = "Black" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.FirstName)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.LastName)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.Gender)</div>
+                <div class="col-sm-6">
+                    @Html.DropDownListFor(m => m.Gender,
+                        new SelectList(new[] { "Male", "Female" }),
+                        new { @class = "form-control", style = "width:361px" })
+                </div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.Password)</div>
+                <div class="col-sm-6">@Html.PasswordFor(m => m.Password, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.ConfirmPassword)</div>
+                <div class="col-sm-6">@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.DateOfBirth)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", type = "date", required = "true", style = "width:365px" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.Street)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.Street, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.Street, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.City)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.City, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-4">@Html.LabelFor(m => m.State)</div>
+                <div class="col-sm-6">@Html.TextBoxFor(m => m.State, new { @class = "form-control", required = "true" })</div>
+                <div class="col-sm-2">@Html.ValidationMessageFor(m => m.State, "", new { @class = "text-danger" })</div>
+            </div>
+            <div class="form-group">
+                <div class="control-label col-sm-2">
+                    <button type="submit" class="form-control" style="background-color:#cc6600; color:black;">Register</button>
+                </div>
+                <div class="control-label col-sm-2">
+                    <button type="reset" class="form-control" style="background-color:#cc6600; color:black;">Reset</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

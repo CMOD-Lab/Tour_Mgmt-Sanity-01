@@ -1,0 +1,46 @@
+@model Tour_Management.Models.AdminLoginViewModel
+@* 
+    Razor View replacing AdminLogin2.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET Core MVC Razor Page.
+    Original: AdminLogin2.aspx + AdminLogin2.aspx.cs (System.Web.UI.Page)
+    Replaced by: AdminController.Login (GET/POST) + this view
+*@
+@{
+    ViewBag.Title = "Admin Login";
+}
+
+<style>
+    .container {
+        text-align: center;
+        background-color: black;
+        width: 100%;
+        font-size: 30px;
+        color: white;
+        padding-bottom: 150px;
+        opacity: 0.8;
+    }
+</style>
+
+<div class="container">
+    <h1>Admin Login</h1>
+
+    @using (Html.BeginForm("Login", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div>
+            @Html.LabelFor(m => m.Email)<br />
+            @Html.TextBoxFor(m => m.Email)<br />
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <br />
+        <div>
+            @Html.LabelFor(m => m.Password)<br />
+            @Html.PasswordFor(m => m.Password)<br />
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <br />
+        <button type="submit" id="Button1">login</button>
+    }
+</div>

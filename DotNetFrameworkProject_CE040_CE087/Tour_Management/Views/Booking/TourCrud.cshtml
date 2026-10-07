@@ -1,0 +1,75 @@
+@*
+    Razor View replacing TourCrud.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET MVC Razor View.
+    Original: TourCrud.aspx + TourCrud.aspx.cs (System.Web.UI.Page)
+    Replaced by: BookingController.TourCrud (GET) + this view
+    Rule: cr-dotnet-0026 - Web Forms Usage
+*@
+@model IEnumerable<Tour_Management.Models.TourCrudViewModel>
+@{
+    ViewBag.Title = "Tour Management";
+}
+
+<h2>Tour Management</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table" style="background-color:white; border:1px solid #DEDFDE; color:black;">
+    <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+        <tr>
+            <th>Tour ID</th>
+            <th>Tour Name</th>
+            <th>Place</th>
+            <th>Days</th>
+            <th>Price</th>
+            <th>Locations</th>
+            <th>Tour Info</th>
+            <th>Picture</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tour in Model)
+        {
+            <tr style="background-color:#F7F7DE; text-align:center;">
+                <td>@tour.TourId</td>
+                <td>@tour.TourName</td>
+                <td>@tour.Place</td>
+                <td>@tour.Days</td>
+                <td>@tour.Price</td>
+                <td>@tour.Locations</td>
+                <td>@tour.TourInfo</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(tour.Pic))
+                    {
+                        <img src="~/Tour_pics/@tour.Pic" style="width:150px;height:150px" alt="@tour.TourName" />
+                    }
+                </td>
+                <td>
+                    @using (Html.BeginForm("UpdateTour", "Booking", FormMethod.Post, new { style = "display:inline;" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("TourId", tour.TourId)
+                        @Html.Hidden("TourName", tour.TourName)
+                        @Html.Hidden("Place", tour.Place)
+                        @Html.Hidden("Days", tour.Days)
+                        @Html.Hidden("Price", tour.Price)
+                        @Html.Hidden("Locations", tour.Locations)
+                        @Html.Hidden("TourInfo", tour.TourInfo)
+                        <button type="submit" class="btn btn-sm btn-primary">Edit</button>
+                    }
+                    @using (Html.BeginForm("DeleteTour", "Booking", FormMethod.Post, new { style = "display:inline;" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("tourId", tour.TourId)
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this tour?');">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

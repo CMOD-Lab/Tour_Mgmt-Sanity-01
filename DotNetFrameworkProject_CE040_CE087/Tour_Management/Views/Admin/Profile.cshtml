@@ -1,0 +1,82 @@
+@* 
+    Razor View replacing AdminProfile.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET Core MVC Razor Page.
+    Original: AdminProfile.aspx + AdminProfile.aspx.cs (System.Web.UI.Page)
+    Replaced by: AdminController.Profile (GET) + this view
+*@
+@{
+    ViewBag.Title = "Admin Profile";
+}
+
+<style type="text/css">
+    .page-header {
+        text-align: center;
+    }
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+    }
+    li {
+        float: left;
+        border-right: 1px solid #bbb;
+    }
+    li:last-child {
+        border-right: none;
+    }
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover:not(.active) {
+        background-color: #111;
+    }
+    .active {
+        background-color: #04AA6D;
+    }
+    .label-info {
+        color: white;
+        background-color: black;
+        opacity: 0.7;
+        padding-left: 50px;
+        align-content: center;
+    }
+    .page-header {
+        background-image: url('~/pics/adminhp.jpg');
+        background-size: cover;
+        text-align: center;
+        color: white;
+        height: 500px;
+        background-color: white;
+        opacity: 0.8;
+        justify-content: center;
+        vertical-align: central;
+    }
+    .page-header h2 {
+        align-items: center;
+    }
+</style>
+
+<ul class="nav navbar nav-tabs">
+    <li class="pull-left"><a href="@Url.Action("Profile", "Admin")">Profile</a></li>
+    <li class="pull-left"><a href="@Url.Action("AddTour", "Tour")">Add Tours</a></li>
+    <li class="pull-left"><a href="@Url.Action("TourCrud", "Tour")">Manage Tours</a></li>
+    <li class="pull-left"><a href="@Url.Action("AllBooking", "Booking")">Current Booking</a></li>
+    <li class="pull-right"><a href="@Url.Action("Logout", "Admin")">Logout</a></li>
+</ul>
+
+<div class="page-header">
+    <h2>
+        <br /><br /><br />
+        <h1>Welcome to the Admin Section</h1>
+        <p>
+            You can manage the admin work here.<br />
+            You can add tours and places for customers.
+        </p>
+    </h2>
+</div>

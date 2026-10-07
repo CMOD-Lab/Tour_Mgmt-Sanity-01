@@ -1,0 +1,46 @@
+@*
+    Razor View replacing mybooking.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET MVC Razor View.
+    Original: mybooking.aspx + mybooking.aspx.cs (System.Web.UI.Page)
+    Replaced by: BookingController.MyBooking (GET) + this view
+    Rule: cr-dotnet-0026 - Web Forms Usage
+*@
+@model IEnumerable<Tour_Management.Models.MyBookingViewModel>
+@{
+    ViewBag.Title = "My Bookings";
+}
+
+<h1 style="text-align:center;">YOUR CURRENT BOOKING</h1>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+<table class="table" style="background-color:white; border:1px solid #DEDFDE; color:black; width:546px; margin-top:96px;">
+    <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+        <tr>
+            <th>Tour Name</th>
+            <th>ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr style="background-color:#F7F7DE; text-align:center;">
+                <td>@booking.TourName</td>
+                <td>@booking.TourId</td>
+                <td>
+                    @using (Html.BeginForm("DeleteBooking", "Booking", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("tourId", booking.TourId)
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Are you sure you want to delete this booking?');">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

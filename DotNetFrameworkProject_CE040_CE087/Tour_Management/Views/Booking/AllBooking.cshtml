@@ -1,0 +1,37 @@
+@*
+    Razor View replacing allbooking.aspx Web Form.
+    Migrated from ASP.NET Web Forms to ASP.NET MVC Razor View.
+    Original: allbooking.aspx + allbooking.aspx.cs (System.Web.UI.Page)
+    Replaced by: BookingController.AllBooking (GET) + this view
+    Rule: cr-dotnet-0026 - Web Forms Usage
+*@
+@model IEnumerable<Tour_Management.Models.BookingViewModel>
+@{
+    ViewBag.Title = "All Bookings";
+}
+
+<h2>All Bookings</h2>
+
+<table class="table" style="background-color:white; border:1px solid #DEDFDE; color:black;">
+    <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+        <tr>
+            <th>Tour ID</th>
+            <th>Tour Name</th>
+            <th>Place</th>
+            <th>Email</th>
+            <th>First Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var booking in Model)
+        {
+            <tr style="background-color:#F7F7DE; text-align:center;">
+                <td>@booking.TourId</td>
+                <td>@booking.TourName</td>
+                <td>@booking.Place</td>
+                <td>@booking.Email</td>
+                <td>@booking.FirstName</td>
+            </tr>
+        }
+    </tbody>
+</table>

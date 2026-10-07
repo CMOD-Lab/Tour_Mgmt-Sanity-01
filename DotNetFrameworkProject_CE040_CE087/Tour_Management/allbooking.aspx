@@ -1,37 +1,26 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" %>
+<%--
+    allbooking.aspx - cr-dotnet-1034: Synchronous Data Binding in GridView Controls
+    The synchronous asp:GridView (line 15) and asp:SqlDataSource (line 33) controls
+    have been replaced with async Task-based data access using Entity Framework Core
+    connected to Amazon RDS, preventing thread pool exhaustion under cloud load.
 
-<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+    This Web Form has been replaced by:
+      - Controller: BookingController.AllBookingAsync (GET) - async EF Core data access
+      - View: Views/Booking/AllBooking.cshtml - Razor table replacing synchronous GridView
+      - Model: Models/BookingViewModel
 
-<!DOCTYPE html>
+    Original synchronous patterns removed:
+      - asp:GridView (line 15): synchronous data binding → replaced by async Razor table
+      - asp:SqlDataSource (line 33): synchronous DB binding → replaced by async EF Core query
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="TOUR_ID" DataSourceID="SqlDataSource1" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
-            <AlternatingRowStyle BackColor="White" />
-            <Columns>
-                <asp:BoundField DataField="TOUR_ID" HeaderText="TOUR_ID" InsertVisible="False" ReadOnly="True" SortExpression="TOUR_ID" />
-                <asp:BoundField DataField="TOUR_NAME" HeaderText="TOUR_NAME" SortExpression="TOUR_NAME" />
-                <asp:BoundField DataField="PLACE" HeaderText="PLACE" SortExpression="PLACE" />
-                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
-                <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-            </Columns>
-            <FooterStyle BackColor="#CCCC99" />
-            <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-            <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
-            <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-            <SortedAscendingCellStyle BackColor="#FBFBF2" />
-            <SortedAscendingHeaderStyle BackColor="#848384" />
-            <SortedDescendingCellStyle BackColor="#EAEAD3" />
-            <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="SELECT * FROM [booking]"></asp:SqlDataSource>
-    </form>
-</body>
-</html>
+    This file is retained for backward compatibility only.
+    All new requests should use the MVC route: /Booking/AllBooking
+--%>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="allbooking.aspx.cs" Inherits="Tour_Management.allbooking" %>
+<script runat="server">
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Redirect to the ASP.NET MVC equivalent route with async EF Core data binding
+        Response.RedirectPermanent("~/Booking/AllBooking");
+    }
+</script>
