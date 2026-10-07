@@ -1,10 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminProfile.aspx.cs" Inherits="Tour_Management.AdminProfile" %>
+@page
+@model Tour_Management.Pages.AdminProfileModel
+@{
+    ViewData["Title"] = "Admin Profile";
+    Layout = null;
+}
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>Admin Profile</title>
      <style type="text/css">
         .page-header{
             text-align:center;
@@ -83,11 +88,11 @@ li a:hover:not(.active) {
 </head>
 <body>
      <ul class="nav navbar nav-tabs">
-         <li class="pull-left"><a href="AdminProfile.aspx"> Profile </a></li>
-         <li class="pull-left"><a href="AddTour.aspx"> Add Tours</a></li>
-         <li class="pull-left"><a href="TourCrud.aspx">Manage Tours</a></li>
-          <li class="pull-left"><a href="allbooking.aspx">Current Booking</a></li>
-          <li class="pull-right"><a href="AdminLogin2.aspx">Logout</a></li>
+         <li class="pull-left"><a href="/AdminProfile"> Profile </a></li>
+         <li class="pull-left"><a href="/AddTour"> Add Tours</a></li>
+         <li class="pull-left"><a href="/TourCrud">Manage Tours</a></li>
+          <li class="pull-left"><a href="/allbooking">Current Booking</a></li>
+          <li class="pull-right"><a href="/AdminLogin2">Logout</a></li>
        
         
     </ul>

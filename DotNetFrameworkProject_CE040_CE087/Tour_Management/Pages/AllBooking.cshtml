@@ -1,0 +1,87 @@
+@page
+@model Tour_Management.Pages.AllBookingModel
+@*
+    MIGRATION NOTE (cr-dotnet-0026):
+    Migrated from ASP.NET Web Forms (allbooking.aspx) to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive, runat="server" attributes
+    - Removed: <%@ Register %> directive for System.Web.DataVisualization.Charting (Web Forms only)
+    - Removed: <asp:GridView> data-bound server control — replaced with Razor @foreach HTML table
+    - Removed: <asp:SqlDataSource> declarative data source with ConnectionString="<%$ ConnectionStrings:dbconnection %>"
+    - Removed: <asp:BoundField> column definitions
+    - Removed: DataKeyNames="TOUR_ID", DataSourceID="SqlDataSource1" GridView bindings
+    - Removed: <form id="form1" runat="server"> Web Forms postback form
+    - Replaced: <asp:GridView> with standard HTML <table> rendered via @foreach over @Model.Bookings
+    - Replaced: <asp:SqlDataSource> SelectCommand with OnGetAsync() EF Core query populating @Model.Bookings
+    - cr-dotnet-1034: Updated to use typed BookingEntity properties (EF Core) instead of dynamic Dapper results
+    - Navigation links updated to use ASP.NET Core tag helpers (asp-page)
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>All Bookings</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+            border: 1px solid #DEDFDE;
+        }
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    @* Replaces <form id="form1" runat="server"> Web Forms postback form *@
+    <div>
+        @* Replaces <asp:GridView> with a standard HTML table rendered via Razor @foreach *@
+        @* cr-dotnet-1034: Data now loaded asynchronously via EF Core OnGetAsync() *@
+        <table>
+            <thead>
+                <tr>
+                    @* Replaces <asp:BoundField DataField="TOUR_ID" HeaderText="TOUR_ID" /> *@
+                    <th>TOUR_ID</th>
+                    @* Replaces <asp:BoundField DataField="TOUR_NAME" HeaderText="TOUR_NAME" /> *@
+                    <th>TOUR_NAME</th>
+                    @* Replaces <asp:BoundField DataField="PLACE" HeaderText="PLACE" /> *@
+                    <th>PLACE</th>
+                    @* Replaces <asp:BoundField DataField="Email" HeaderText="Email" /> *@
+                    <th>Email</th>
+                    @* Replaces <asp:BoundField DataField="FirstName" HeaderText="FirstName" /> *@
+                    <th>FirstName</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Replaces <asp:GridView> row rendering — iterates over @Model.Bookings populated via EF Core async query *@
+                @if (Model.Bookings != null)
+                {
+                    foreach (var booking in Model.Bookings)
+                    {
+                        <tr>
+                            @* cr-dotnet-1034: Using typed BookingEntity properties (EF Core) *@
+                            <td>@booking.TourId</td>
+                            <td>@booking.TourName</td>
+                            <td>@booking.Place</td>
+                            <td>@booking.Email</td>
+                            <td>@booking.FirstName</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -68,6 +68,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- cr-dotnet-1032: AWS SDK for S3 – replaces Server.MapPath / local filesystem file upload -->
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.300.4\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.307.4\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- cr-dotnet-1034: EF Core packages for async GridView data binding with Amazon RDS -->
+    <Reference Include="Microsoft.EntityFrameworkCore">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.6.0.36\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.SqlServer">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.SqlServer.6.0.36\lib\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.6.0.36\lib\net6.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="AddTour.aspx" />
     <Content Include="AdminLogin2.aspx" />
     <Content Include="AdminProfile.aspx" />
@@ -144,6 +170,10 @@
       <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <!-- cr-dotnet-1041: CspHttpModule – Content Security Policy HttpModule for cloud SOC2 compliance -->
+    <Compile Include="CspHttpModule.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SignUpForm.aspx.cs">
       <DependentUpon>SignUpForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

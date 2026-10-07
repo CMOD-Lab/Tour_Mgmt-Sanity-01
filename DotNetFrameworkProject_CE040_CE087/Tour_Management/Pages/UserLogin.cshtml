@@ -1,18 +1,20 @@
-@* MIGRATION NOTE (cr-dotnet-0026 - Web Forms Usage):
-   This file has been migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages.
-   - Removed: <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="userlogin.aspx.cs" Inherits="Tour_Management.userlogin" %> directive (line 1)
-   - Removed: <head runat="server">, <div runat="server">, <form id="form1" runat="server"> Web Forms server-side attributes
-   - Removed: <asp:Label>, <asp:TextBox>, <asp:Button> Web Forms server controls
-   - Removed: OnClick="Btn_Submit" and OnClick="Btn_reg" postback event handlers
-   - Replaced: <asp:TextBox ID="txtEmail"> with <input asp-for="Email"> tag helper
-   - Replaced: <asp:TextBox ID="txtPassword"> with <input asp-for="Password"> tag helper
-   - Replaced: <asp:Button OnClick="Btn_Submit"> with <button asp-page-handler="Login">
-   - Replaced: <asp:Button OnClick="Btn_reg"> with <button asp-page-handler="Register">
-   - Added: @Model.StatusMessage display to replace Response.Write()
-*@
 @page
 @model Tour_Management.Pages.UserLoginModel
-
+@*
+    MIGRATION NOTE (cr-dotnet-0026):
+    Migrated from ASP.NET Web Forms (userlogin.aspx) to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive, runat="server" attributes (line 1)
+    - Removed: <head runat="server">, <div runat="server">, <form id="form1" runat="server"> Web Forms server-side attributes
+    - Removed: <asp:Label>, <asp:TextBox>, <asp:Button> Web Forms server controls
+    - Removed: OnClick="Btn_Submit" and OnClick="Btn_reg" postback event handlers
+    - Replaced: <asp:TextBox ID="txtEmail"> with <input asp-for="Email"> tag helper
+    - Replaced: <asp:TextBox ID="txtPassword"> with <input asp-for="Password"> tag helper
+    - Replaced: <asp:Button OnClick="Btn_Submit"> with <button asp-page-handler="Login">
+    - Replaced: <asp:Button OnClick="Btn_reg"> with <button asp-page-handler="Register">
+    - Added: @Model.StatusMessage display to replace Response.Write()
+    - Navigation links updated to use ASP.NET Core tag helpers (asp-page)
+*@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>User Login</title>

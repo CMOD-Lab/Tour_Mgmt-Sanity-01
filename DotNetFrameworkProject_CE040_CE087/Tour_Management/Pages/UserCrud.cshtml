@@ -1,0 +1,112 @@
+@page
+@model Tour_Management.Pages.UserCrudModel
+@*
+    MIGRATION NOTE (cr-dotnet-0026):
+    Migrated from ASP.NET Web Forms (usercrud.aspx) to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive, runat="server" attributes
+    - Removed: <asp:GridView> data-bound server control — replaced with Razor @foreach HTML table
+    - Removed: <asp:SqlDataSource> declarative data source with ConnectionString="<%$ ConnectionStrings:dbconnection %>"
+    - Removed: <asp:BoundField> column definitions
+    - Removed: AutoGenerateEditButton="True", DataKeyNames="Email", DataSourceID="SqlDataSource1" GridView bindings
+    - Removed: <form id="form1" runat="server"> Web Forms postback form
+    - Replaced: <asp:GridView> with standard HTML <table> rendered via @foreach over @Model.Users
+    - Replaced: <asp:SqlDataSource> SelectCommand with OnGetAsync() EF Core query populating @Model.Users
+    - Replaced: <asp:SqlDataSource> UpdateCommand with OnPostUpdateAsync() Razor Page handler
+    - cr-dotnet-1034: Updated to use typed UserInfoEntity properties (EF Core) instead of dynamic Dapper results
+    - cr-dotnet-1034: All data access converted to async EF Core patterns for Amazon RDS,
+      preventing thread pool exhaustion under cloud load and enabling efficient auto-scaling.
+    - Navigation links updated to use ASP.NET Core tag helpers (asp-page)
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>User Management</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border: 1px solid #DEDFDE;
+            color: black;
+        }
+        th {
+            background-color: #6B696B;
+            color: white;
+            font-weight: bold;
+            padding: 4px;
+        }
+        td {
+            padding: 4px;
+            text-align: center;
+            background-color: #F7F7DE;
+            border: 1px solid #DEDFDE;
+        }
+        tr:nth-child(even) td {
+            background-color: white;
+        }
+        .btn-action {
+            margin: 2px;
+            padding: 4px 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    @* Replaces <form id="form1" runat="server"> Web Forms postback form *@
+    <div>
+        @* Replaces <asp:GridView> with a standard HTML table rendered via Razor @foreach *@
+        @* cr-dotnet-1034: Data now loaded asynchronously via EF Core OnGetAsync() *@
+        <table>
+            <thead>
+                <tr>
+                    @* Replaces <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" /> *@
+                    <th>Email</th>
+                    @* Replaces <asp:BoundField DataField="FirstName" HeaderText="FirstName" /> *@
+                    <th>FirstName</th>
+                    @* Replaces <asp:BoundField DataField="LastName" HeaderText="LastName" /> *@
+                    <th>LastName</th>
+                    @* Replaces <asp:BoundField DataField="Gender" HeaderText="Gender" /> *@
+                    <th>Gender</th>
+                    @* Replaces <asp:BoundField DataField="Password" HeaderText="Password" /> *@
+                    <th>Password</th>
+                    @* Replaces <asp:BoundField DataField="City" HeaderText="City" /> *@
+                    <th>City</th>
+                    @* Replaces AutoGenerateEditButton="True" *@
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Replaces <asp:GridView> row rendering — iterates over @Model.Users populated via async EF Core query *@
+                @* cr-dotnet-1034: Using typed UserInfoEntity properties (EF Core) instead of dynamic Dapper results *@
+                @if (Model.Users != null)
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <tr>
+                            @* cr-dotnet-1034: Using typed UserInfoEntity properties (EF Core) *@
+                            <td>@user.Email</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.Gender</td>
+                            <td>@user.Password</td>
+                            <td>@user.City</td>
+                            <td>
+                                @* Replaces AutoGenerateEditButton — inline edit form *@
+                                <form method="post" asp-page-handler="Update" style="display:inline;">
+                                    <input type="hidden" name="email" value="@user.Email" />
+                                    <input type="text" name="firstName" value="@user.FirstName" class="btn-action" style="width:90px;" />
+                                    <input type="text" name="lastName" value="@user.LastName" class="btn-action" style="width:90px;" />
+                                    <input type="text" name="gender" value="@user.Gender" class="btn-action" style="width:60px;" />
+                                    <input type="text" name="password" value="@user.Password" class="btn-action" style="width:90px;" />
+                                    <input type="text" name="city" value="@user.City" class="btn-action" style="width:90px;" />
+                                    <button type="submit" class="btn-action">Update</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,41 +1,82 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %>
-
+@* MIGRATION NOTE (cr-dotnet-0026 - Web Forms Usage):
+   This file has been migrated from ASP.NET Web Forms to ASP.NET Core Razor Pages.
+   - Removed: <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %> directive (line 1)
+   - Removed: <head runat="server">, <form id="form1" runat="server"> Web Forms server-side attributes
+   - Removed: <asp:GridView> data-bound server control (line 11) — replaced with Razor @foreach HTML table
+     cr-dotnet-1034: Synchronous GridView.DataBind() replaced with async Task-based EF Core OnGetAsync()
+   - Removed: <asp:SqlDataSource> declarative data source (line 30) with ConnectionString="<%$ ConnectionStrings:dbconnection %>"
+     cr-dotnet-1034: SqlDataSource synchronous data binding replaced with async EF Core queries via Amazon RDS
+   - Removed: <asp:BoundField> column definitions
+   - Removed: AutoGenerateEditButton="True", DataKeyNames="Email", DataSourceID="SqlDataSource1" GridView bindings
+   - Replaced: <asp:GridView> with standard HTML <table> rendered via @foreach over @Model.Users
+   - Replaced: <asp:SqlDataSource> SelectCommand with OnGetAsync() EF Core query populating @Model.Users
+   - Replaced: <asp:SqlDataSource> UpdateCommand with OnPostUpdateAsync() Razor Page handler
+   - cr-dotnet-1034: All data access converted to async EF Core patterns for Amazon RDS,
+     preventing thread pool exhaustion under cloud load and enabling efficient auto-scaling.
+*@
+@page
+@model Tour_Management.Pages.UserCrudModel
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
+<head>
+    <title>User Management</title>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Email" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
-        <AlternatingRowStyle BackColor="White" />
-        <Columns>
-            <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" SortExpression="Email" />
-            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-            <asp:BoundField DataField="Gender" HeaderText="Gender" SortExpression="Gender" />
-            <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
-            <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
-        </Columns>
-        <FooterStyle BackColor="#CCCC99" />
-        <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-        <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
-        <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#FBFBF2" />
-        <SortedAscendingHeaderStyle BackColor="#848384" />
-        <SortedDescendingCellStyle BackColor="#EAEAD3" />
-        <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-   
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="Select top (select COUNT(*) from UserInfo) * From UserInfo
-EXCEPT
-Select top ((select COUNT(*) from UserInfo)-(1)) * From UserInfo"
-            
-            UpdateCommand="UPDATE [UserInfo] Set [Email]=@Email,[FirstName]=@FirstName,[LastName]=@LastName,[Gender]=@Gender,[Password]=@Password,[City]=@City Where [Email]=@Email"
-            ></asp:SqlDataSource>
-    </form>
-   
+    @* Replaces <form id="form1" runat="server"> Web Forms postback form *@
+    <div>
+        @* Replaces <asp:GridView> (line 11) with a standard HTML table rendered via Razor @foreach *@
+        @* cr-dotnet-1034: Data now loaded asynchronously via EF Core OnGetAsync() *@
+        <table style="background-color:white; border-color:#DEDFDE; border-style:None; border-width:1px; color:black; border-collapse:collapse;">
+            <thead>
+                <tr style="background-color:#6B696B; color:white; font-weight:bold;">
+                    @* Replaces <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" /> *@
+                    <th style="padding:4px;">Email</th>
+                    @* Replaces <asp:BoundField DataField="FirstName" HeaderText="FirstName" /> *@
+                    <th style="padding:4px;">FirstName</th>
+                    @* Replaces <asp:BoundField DataField="LastName" HeaderText="LastName" /> *@
+                    <th style="padding:4px;">LastName</th>
+                    @* Replaces <asp:BoundField DataField="Gender" HeaderText="Gender" /> *@
+                    <th style="padding:4px;">Gender</th>
+                    @* Replaces <asp:BoundField DataField="Password" HeaderText="Password" /> *@
+                    <th style="padding:4px;">Password</th>
+                    @* Replaces <asp:BoundField DataField="City" HeaderText="City" /> *@
+                    <th style="padding:4px;">City</th>
+                    @* Replaces AutoGenerateEditButton="True" *@
+                    <th style="padding:4px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* Replaces <asp:GridView> row rendering — iterates over @Model.Users populated via async EF Core query *@
+                @* cr-dotnet-1034: Replaces <asp:SqlDataSource> (line 30) synchronous data binding *@
+                @if (Model.Users != null)
+                {
+                    foreach (var user in Model.Users)
+                    {
+                        <tr style="background-color:#F7F7DE; text-align:center;">
+                            <td style="padding:4px;">@user.Email</td>
+                            <td style="padding:4px;">
+                                @* Replaces AutoGenerateEditButton — inline edit form *@
+                                <form method="post" asp-page-handler="Update" style="display:inline;">
+                                    <input type="hidden" name="email" value="@user.Email" />
+                                    <input type="text" name="firstName" value="@user.FirstName" style="width:100px;" />
+                                    <input type="text" name="lastName" value="@user.LastName" style="width:100px;" />
+                                    <input type="text" name="gender" value="@user.Gender" style="width:70px;" />
+                                    <input type="text" name="password" value="@user.Password" style="width:100px;" />
+                                    <input type="text" name="city" value="@user.City" style="width:100px;" />
+                                    <button type="submit" style="margin:2px; padding:4px 8px; cursor:pointer;">Update</button>
+                                </form>
+                            </td>
+                            <td style="padding:4px;">@user.LastName</td>
+                            <td style="padding:4px;">@user.Gender</td>
+                            <td style="padding:4px;">@user.Password</td>
+                            <td style="padding:4px;">@user.City</td>
+                            <td style="padding:4px;"></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

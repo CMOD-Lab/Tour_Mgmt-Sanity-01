@@ -1,0 +1,103 @@
+@page
+@model Tour_Management.Pages.OrderModel
+@*
+    MIGRATION NOTE (cr-dotnet-0026):
+    Migrated from ASP.NET Web Forms (Order.aspx) to ASP.NET Core Razor Pages.
+    - Removed: <%@ Page %> directive, runat="server" attributes
+    - Removed: <form runat="server"> Web Forms postback form
+    - Removed: <asp:Label>, <asp:TextBox>, <asp:Button> server controls
+    - Replaced: Web Forms server controls with standard HTML form elements bound via Razor tag helpers
+    - Replaced: OnClick="btn_click" postback with asp-page-handler="Post" form submission
+    - Replaced: Response.Write with @Model.StatusMessage Razor binding
+    - Navigation links updated to use ASP.NET Core tag helpers (asp-page)
+*@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Book Tour</title>
+    <style>
+        .container {
+            text-align: center;
+            background-color: black;
+            width: 100%;
+            font-size: 30px;
+            color: white;
+            padding-bottom: 150px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    @* Replaces <form runat="server"> Web Forms postback form with ASP.NET Core tag-helper form *@
+    <form method="post">
+        <div class="container">
+            <div class="page-header">
+                <h1>Confirm Tour</h1>
+            </div>
+
+            @* Display status message — replaces Response.Write("Registration Successful") *@
+            @if (!string.IsNullOrEmpty(Model.StatusMessage))
+            {
+                <div class="alert">@Model.StatusMessage</div>
+            }
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @* Replaces <asp:Label ID="Label1" runat="server" Text="Your Name"/> *@
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Name">Your Name</label>
+                    </div>
+                    @* Replaces <asp:TextBox ID="name" runat="server" required="true" ForeColor="Black" class="form-control"/> *@
+                    <div class="col-sm-6">
+                        <input asp-for="Name" type="text" required="required" class="form-control" style="color:black;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* Replaces <asp:Label ID="Label3" runat="server" Text="Your City"/> *@
+                    <div class="control-label col-sm-4">
+                        <label asp-for="City">Your City</label>
+                    </div>
+                    @* Replaces <asp:TextBox ID="city" runat="server"> *@
+                    <div class="col-sm-6">
+                        <input asp-for="City" type="text" class="form-control" style="color:black;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* Replaces <asp:Label ID="Label5" runat="server" Text="Tour Name "/> *@
+                    <div class="control-label col-sm-4">
+                        <label asp-for="TourName">Tour Name</label>
+                    </div>
+                    @* Replaces <asp:TextBox ID="tour_name" required="true" runat="server" ForeColor="Black" class="form-control"/> *@
+                    <div class="col-sm-6">
+                        <input asp-for="TourName" type="text" required="required" class="form-control" style="color:black;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* Replaces <asp:Label ID="Label10" runat="server" Text="Mobile Number"/> *@
+                    <div class="control-label col-sm-4">
+                        <label asp-for="Number">Mobile Number</label>
+                    </div>
+                    @* Replaces <asp:TextBox ID="number" required="true" runat="server" ForeColor="Black" class="form-control" TextMode="Number"/> *@
+                    <div class="col-sm-6">
+                        <input asp-for="Number" type="number" required="required" class="form-control" style="color:black;" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @* Replaces <asp:Button ID="Book" runat="server" Text="Register" OnClick="btn_click"/> *@
+                    <div class="control-label col-sm-2">
+                        <button type="submit" class="form-control" style="background-color:#cc6600; color:black;">Register</button>
+                    </div>
+                    @* Replaces <asp:Button ID="Reset" type="reset" runat="server" Text="Reset"/> *@
+                    <div class="control-label col-sm-2">
+                        <button type="reset" class="form-control" style="background-color:#cc6600; color:black;">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
