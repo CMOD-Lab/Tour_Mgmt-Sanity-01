@@ -7,38 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+// cr-dotnet-1034: Web Forms GridView and SqlDataSource control declarations removed.
+// Synchronous data binding via asp:GridView (DataSourceID="SqlDataSource1",
+// AutoGenerateEditButton="True", AllowSorting="True") and asp:SqlDataSource
+// (complex EXCEPT SelectCommand on UserInfo, UpdateCommand for user data)
+// have been replaced with async Task handlers using Dapper connected to Amazon RDS
+// in the Razor Page model (Pages/UserCrud.cshtml.cs / UserCrudModel).
+// The System.Web.UI.WebControls.GridView and System.Web.UI.WebControls.SqlDataSource
+// field declarations are no longer required as the page has been migrated to
+// ASP.NET Core Razor Pages (cr-dotnet-0026).
+
 namespace Tour_Management
 {
-
-
+    // usercrud partial class retained for reference only.
+    // Active implementation is in Tour_Management.Pages.UserCrudModel (Pages/UserCrud.cshtml.cs).
     public partial class usercrud
     {
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
-
-        /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        // form1, GridView1, and SqlDataSource1 Web Forms control declarations removed.
+        // Replaced by async Razor Page model with Dapper + Amazon RDS data access.
+        // See: Pages/UserCrud.cshtml.cs -> UserCrudModel.OnGetAsync(), OnPostEditAsync()
     }
 }

@@ -1,0 +1,58 @@
+@page
+@model Tour_Management.Pages.UserCrudModel
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <h2>User Management</h2>
+
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert">@Model.StatusMessage</div>
+    }
+
+    <table border="1" cellpadding="4" style="background-color:white; border-color:#DEDFDE; color:black;">
+        <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+            <tr>
+                <th>Email</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Password</th>
+                <th>City</th>
+                <th>Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr style="background-color:#F7F7DE; text-align:center;">
+                    <td>@user.Email</td>
+                    <td>@user.FirstName</td>
+                    <td>@user.LastName</td>
+                    <td>@user.Gender</td>
+                    <td>@user.Password</td>
+                    <td>@user.City</td>
+                    <td>
+                        <form method="post" asp-page-handler="Edit">
+                            <input type="hidden" name="email" value="@user.Email" />
+                            <input type="text" name="firstName" value="@user.FirstName" />
+                            <input type="text" name="lastName" value="@user.LastName" />
+                            <input type="text" name="gender" value="@user.Gender" />
+                            <input type="text" name="password" value="@user.Password" />
+                            <input type="text" name="city" value="@user.City" />
+                            <button type="submit" style="background-color:#cc6600;">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

@@ -66,6 +66,22 @@
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper">
+      <HintPath>..\packages\Dapper.2.1.28\lib\net461\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.SqlClient">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.5.2.1\lib\net462\Microsoft.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client">
+      <HintPath>..\packages\Microsoft.Data.SqlClient.5.2.1\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <!-- cr-dotnet-1032: AWS SDK references for Amazon S3 file upload -->
+    <Reference Include="AWSSDK.Core">
+      <HintPath>..\packages\AWSSDK.Core.3.7.400.28\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.S3">
+      <HintPath>..\packages\AWSSDK.S3.3.7.414.3\lib\net45\AWSSDK.S3.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddTour.aspx" />
@@ -144,6 +160,8 @@
       <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <!-- cr-dotnet-1041: Custom IHttpModule that injects Content-Security-Policy headers -->
+    <Compile Include="ContentSecurityPolicyModule.cs" />
     <Compile Include="SignUpForm.aspx.cs">
       <DependentUpon>SignUpForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

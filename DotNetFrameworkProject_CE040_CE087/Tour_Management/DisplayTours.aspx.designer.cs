@@ -7,38 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+// cr-dotnet-1034: Web Forms GridView and SqlDataSource control declarations removed.
+// Synchronous data binding via asp:GridView (DataSourceID="SqlDataSource1") and
+// asp:SqlDataSource (SelectCommand="SELECT ... FROM [Tour]") have been replaced with
+// async Task OnGetAsync() using Dapper QueryAsync<TourItem>() connected to Amazon RDS
+// in the Razor Page model (DisplayTours.aspx.cs / Pages/DisplayToursModel).
+// The System.Web.UI.WebControls.GridView and System.Web.UI.WebControls.SqlDataSource
+// field declarations are no longer required as the page has been migrated to
+// ASP.NET Core Razor Pages (cr-dotnet-0026).
+
 namespace Tour_Management
 {
-
-
+    // DisplayTours partial class retained for reference only.
+    // Active implementation is in Tour_Management.Pages.DisplayToursModel (DisplayTours.aspx.cs).
     public partial class DisplayTours
     {
-
-        /// <summary>
-        /// form1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// SqlDataSource1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
-
-        /// <summary>
-        /// GridView1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        // form1, SqlDataSource1, and GridView1 Web Forms control declarations removed.
+        // Replaced by async Razor Page model with Dapper + Amazon RDS data access.
+        // See: DisplayTours.aspx.cs -> DisplayToursModel.OnGetAsync()
     }
 }

@@ -1,0 +1,46 @@
+@page
+@model Tour_Management.Pages.MyBookingModel
+@{
+    ViewData["Title"] = "My Current Booking";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; YOUR CURRENT BOOKING</h1>
+
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert">@Model.StatusMessage</div>
+    }
+
+    <table border="1" cellpadding="4" style="background-color:white; border-color:#DEDFDE; color:black; width:546px; margin-top:96px;">
+        <thead style="background-color:#6B696B; color:white; font-weight:bold;">
+            <tr>
+                <th>TOUR_NAME</th>
+                <th>ID</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Bookings)
+            {
+                <tr style="background-color:#F7F7DE; text-align:center;">
+                    <td>@booking.TourName</td>
+                    <td>@booking.TourId</td>
+                    <td>
+                        <form method="post" asp-page-handler="Delete">
+                            <input type="hidden" name="tourId" value="@booking.TourId" />
+                            <button type="submit" style="background-color:#cc0000; color:white;">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <br />
+</body>
+</html>

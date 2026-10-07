@@ -1,41 +1,24 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="usercrud.aspx.cs" Inherits="Tour_Management.usercrud" %>
+<%-- 
+    MIGRATED: This Web Forms page has been migrated to ASP.NET Core Razor Pages.
+    The equivalent Razor Page is located at: Pages/UserCrud.cshtml
+    This file is retained for reference only and is no longer active.
+    
+    Migration: ASP.NET Web Forms -> ASP.NET Core Razor Pages (cr-dotnet-0026)
+    The <%@ Page %> directive, runat="server" controls, asp:GridView, asp:SqlDataSource,
+    and code-behind inheritance from System.Web.UI.Page have been replaced with a Razor Page model.
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-    <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Email" DataSourceID="SqlDataSource1" AllowSorting="True" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
-        <AlternatingRowStyle BackColor="White" />
-        <Columns>
-            <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" SortExpression="Email" />
-            <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
-            <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
-            <asp:BoundField DataField="Gender" HeaderText="Gender" SortExpression="Gender" />
-            <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
-            <asp:BoundField DataField="City" HeaderText="City" SortExpression="City" />
-        </Columns>
-        <FooterStyle BackColor="#CCCC99" />
-        <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-        <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-        <RowStyle BackColor="#F7F7DE" HorizontalAlign="Center" />
-        <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-        <SortedAscendingCellStyle BackColor="#FBFBF2" />
-        <SortedAscendingHeaderStyle BackColor="#848384" />
-        <SortedDescendingCellStyle BackColor="#EAEAD3" />
-        <SortedDescendingHeaderStyle BackColor="#575357" />
-        </asp:GridView>
-   
-        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:dbconnection %>" SelectCommand="Select top (select COUNT(*) from UserInfo) * From UserInfo
-EXCEPT
-Select top ((select COUNT(*) from UserInfo)-(1)) * From UserInfo"
-            
-            UpdateCommand="UPDATE [UserInfo] Set [Email]=@Email,[FirstName]=@FirstName,[LastName]=@LastName,[Gender]=@Gender,[Password]=@Password,[City]=@City Where [Email]=@Email"
-            ></asp:SqlDataSource>
-    </form>
-   
-</body>
-</html>
+    cr-dotnet-1034: Synchronous GridView data binding replaced with async Task-based pattern.
+    Original synchronous pattern (lines 11, 30 - now removed):
+      Line 11: <asp:GridView ID="GridView1" runat="server" ... DataSourceID="SqlDataSource1"
+               AutoGenerateEditButton="True" AllowSorting="True" ...>
+      Line 30: <asp:SqlDataSource ID="SqlDataSource1" ...
+               SelectCommand="Select top (select COUNT(*) from UserInfo) * From UserInfo
+                              EXCEPT Select top (...) * From UserInfo"
+               UpdateCommand="UPDATE [UserInfo] Set ... Where [Email]=@Email">
+    
+    Replaced with async Razor Page handlers in Pages/UserCrud.cshtml.cs:
+      public async Task OnGetAsync()          -> uses await conn.QueryAsync<UserViewModel>()
+      public async Task OnPostEditAsync(...)  -> uses await conn.ExecuteAsync() for UPDATE
+    Connected to Amazon RDS via Dapper for cloud-native async data access,
+    preventing thread pool exhaustion and enabling efficient auto-scaling.
+--%>
